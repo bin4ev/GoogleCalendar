@@ -1,0 +1,111 @@
+ .selected {
+    background-color: #1876F2;
+    color: white;
+} 
+.curr-date{
+    background-color: #1967D2 !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* .container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #CED0D4;
+    border-radius: 10px;
+} */
+.header-calendar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.days-wrapper {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #CED0D4;
+    font-weight: 300;
+    font-size: 14px;
+    color: #B3B4B6;
+}
+.days{
+    width: 25px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #70757a;
+}
+.dates-wrapper {
+    flex-wrap: wrap;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 16px;
+    display: flex;
+}
+.title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #050505;
+}
+.date-cell {
+    width: 14%;
+    height: 120px;
+    align-content: center;
+    justify-content: flex-start;
+    border: 1px solid #DADCE0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btns {
+    cursor: pointer;
+    color: grey;
+    width: 36px;
+    padding: 5px;
+    border-radius: 27px;
+    font-size: 23px;
+    background: #F2F2F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dates-before {
+    color: grey;
+}
+.events {
+    margin-top: 10px;
+    padding: 4px 12px;
+    border-radius: 19px;
+    font-size: 12px;
+    color: #70757a;
+}
+.events:hover {
+    background-color:  #DADCE0;
+}
+.events-name {
+  /*   color: #5F6368; */
+    font-weight: bold;
+}
+.holiday {
+    white-space: nowrap;
+    font-size: 10px;
+    width: 88%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+    font-weight: bold;
+    background-color: green;
+    padding: 4px 12px;
+    border-radius: 19px;
+    font-size: 12px;
+}
+.dot{
+    width: 7px;
+    height: 7px;
+    border-radius: 9px;
+    background: yellow;
+}

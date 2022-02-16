@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing:border-box;
+    font-family: helvetica;
+}
+.selected {
+    background-color: #1876F2;
+    color: white;
+}
+.curr-date {
+    font-weight: bold;
+    background-color: white !important;
+}
+.container {
+    width: 250px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #CED0D4;
+    border-radius: 10px;
+}
+.header-calendar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.days-wrapper {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #CED0D4;
+    margin-bottom: 10px;
+    font-weight: 300;
+    font-size: 13px;
+    color: #B3B4B6;
+}
+.days{
+    width: 25px;
+    margin-bottom: 5px;
+}
+.dates-wrapper {
+    flex-wrap: wrap;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+}
+.title {
+    font-weight: 500;
+    color: #050505;
+}
+.date-cell {
+    padding: 6px;   
+    display: flex;
+    width: 24px;
+    border-radius: 8px;
+    align-items: center;
+    align-content: center;
+    margin-right: 8px;
+    justify-content: center;
+}
+.btns {
+    cursor: pointer;
+    color: grey;
+    border-radius: 27px;
+    font-size: 23px;
+    background: #F2F2F2;
+    display: flex;
+    align-items: center;
+    width: 30px;
+    justify-content: center;
+}
+.dates-before {
+    color: grey;
+}

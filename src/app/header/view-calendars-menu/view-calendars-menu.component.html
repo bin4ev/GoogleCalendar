@@ -1,0 +1,14 @@
+<div class="btn" (click)="toggleMenuBtn()">{{currView}}
+    <fa-icon [icon]="iconDown"></fa-icon>
+</div>
+<div >
+    <section #section class="container">
+        <div class="container-items"  [style.display]="showMenuButton ? 'flex' : 'none'"
+        *ngFor="let item of items" 
+        (click)="changeState(item.name)"
+        [routerLink]="[item.name.toLowerCase()]">
+            <span class="days">{{item.name}}</span>
+            <span class="days">{{item.shortcut}}</span>
+        </div>
+    </section>
+</div>

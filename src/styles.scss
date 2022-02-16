@@ -1,1 +1,88 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    box-sizing:border-box;
+    font-family: helvetica;
+}
+body {
+    height: 100vh;
+}
+.main {
+    display: flex;
+}
+.body {
+    width: 100%;
+}
+.sidebar {
+    margin-top: 15px;
+    display: flex;
+    width: 0;
+    flex-direction: column;
+    overflow-x: hidden;
+    transition: 0.3s;
+}
+.holidays-wraper {
+    margin-top: 20px;
+}
+.big-btn {
+    border-bottom: solid 3px #c9c4c4;
+    border-top: solid 2px #e5dada;
+    border-left: solid 2px #ebe8e8;
+    border-right: solid 2px #f1ecec;
+    padding: 16px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+    border-radius: 35px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #70757a;
+    align-items: center;
+}
+.big-btn:hover {
+    box-shadow: 0px 7px 20px 0px #dbd2d2;
+    background: #F6FAFE;
+}
+img {
+   max-width: 100%;
+}
+.big-btn-logo {
+    width: 20px;
+    transform: rotate(45deg);
+}
+
+.mainmenubtn {
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: bold;
+    color: grey;;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 16px;
+}
+.mainmenubtn:hover {
+    background-color: rgb(226, 218, 218)
+}
+.mainmenubtn:active {
+    background-image:  linear-gradient(to right, rgba(27, 27, 27, 0), rgb(157, 155, 155));
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-child {
+    display: none;
+    min-width: 200px;
+}
+input[type=checkbox] {
+    outline: none;
+
+
+}
+input[type=checkbox]:checked {
+    background-color: inherit
+}
+
+
+  

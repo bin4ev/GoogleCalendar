@@ -1,0 +1,47 @@
+<nav *ngIf="!searchMode">
+    <ul class="nav-bar-left">
+        <li class="main-menu" (click)="openAside.emit()">☰</li>
+        <li class="logo">
+            <img src="https://frejun.com/wp-content/uploads/2021/10/google-calendar-2.png" alt="">
+        </li>
+    </ul>
+    <ul class="nav-bar-middle">
+        <li class="btn" (click)="getToday.emit()">Today</li>
+        <li class="navigate-wraper">
+            <div class="btns"  (click)="previous.emit()">
+                <span id="previous"><fa-icon class="icon" [icon]="iconLeft"></fa-icon></span>
+            </div>
+            <div class="btns" (click)="next.emit()">
+                <span id="next"><fa-icon [icon]="iconRight"></fa-icon></span>
+            </div>
+        </li>
+        <li class="month-title" >{{month}}</li>
+    </ul>
+    <ul class="nav-bar-right">
+        <li class="main-menu" (click)="toggleSearchMode()">
+            <fa-icon class="icons" [icon]="iconSearch"></fa-icon>
+        </li>
+        <li>
+            <app-view-calendars-menu [items]="items"></app-view-calendars-menu>
+        </li>
+    </ul>
+     
+</nav>
+
+<nav class="second-nav" *ngIf="searchMode">
+    <ul class="nav-bar-left">
+        <li style="cursor: pointer;"  (click)="toggleSearchMode()">
+            <fa-icon [icon]="iconLeft"></fa-icon>
+        </li>
+        <li>Search</li>
+    </ul>
+    <ul class="nav-bar-middle">
+        <div class="search">
+            <div  class="main-menu"> 
+                <fa-icon class="icons" [icon]="iconSearch"></fa-icon>
+            </div>
+            <input type="text" placeholder="Search">
+        </div>
+    </ul>
+  
+</nav>
