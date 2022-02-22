@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
-  private setShowCalendar = new Subject<Set<string>>();
-  private currMonthSource = new Subject<any>()
+  d = new Date()
+  private setShowCalendar = new BehaviorSubject(new Set());
+  private setDateSource = new BehaviorSubject(this.d)
 
-  data$ = this.setShowCalendar.asObservable()
-  month$ = this.currMonthSource.asObservable()
+data$ = this.setShowCalendar.asObservable()
+getCurrDate$ = this.setDateSource.asObservable()
 
-  constructor() { }
+constructor() { }
 
-  setEventToShow(d: Set<string>) {
-    this.setShowCalendar.next(d)
-  }
+setEventToShow(d: Set<string>) {
+  this.setShowCalendar.next(d)
+}
 
-  getCurrMonth(month: any) {
-    this.currMonthSource.next(month)
-  }
+  setCurrDate(d: Date) {
+  this.setDateSource.next(d)
+}
 
 }

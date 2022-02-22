@@ -1,6 +1,6 @@
 <div class="container">
     <div class="header-calendar">
-        <div class="btns"  [class.curr-date]="matchDate" (click)="previous()">
+        <div class="btns"(click)="previous()">
             <span id="previous"><fa-icon class="icon" [icon]="iconLeft"></fa-icon></span>
         </div>
         <span class="title">{{currMonth}} {{currYear}}</span>
@@ -15,7 +15,6 @@
         <div class="date-cell"  *ngFor="let date of dates">
             <span #d class="dates" 
                  [class.curr-date]="isToday(date)"
-                 [class.dates-before]="isDateBefore(date)"
                  (click) ='onSelect($event)'>
                  {{date}}
             </span>

@@ -13,7 +13,7 @@ export class ViewCalendarsMenuComponent {
   iconDown = faAngleDown
 
   showMenuButton = false
-  currView: string = 'Month'
+  currView = 'Month'
 
   changeState(currState: string) {
     this.currView = currState
@@ -22,17 +22,14 @@ export class ViewCalendarsMenuComponent {
 
   toggleMenuBtn() {
     this.showMenuButton = !this.showMenuButton
-    if( this.showMenuButton) {
+    if( this.showMenuButton) { //check class
       this.dropdownEl.nativeElement.style.width = '17%'
       this.dropdownEl.nativeElement.style.height = '140px'
       this.dropdownEl.nativeElement.style.top = '50px'
-   
     } else {
       this.dropdownEl.nativeElement.style.width = '0%'
       this.dropdownEl.nativeElement.style.height = '0px'
       this.dropdownEl.nativeElement.style.top = '40px'
     }
-      
   }
-
 }

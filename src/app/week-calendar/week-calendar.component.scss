@@ -1,0 +1,123 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing:border-box;
+    font-family: helvetica;
+}
+.selected {
+    background-color: #1876F2;
+    color: white;
+}
+.curr-date {
+    background-color: #1967D2 !important;
+    color: white;
+    border-radius: 30px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #CED0D4;
+    height: 100vh;
+}
+.header-calendar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.days-wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #B3B4B6;
+    position: relative;
+    bottom: 20px;
+}
+.days{
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+.dates-wrapper {
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 20px;
+    padding: 25px;
+}
+.dates {
+    font-size: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 20px;
+}
+.title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #050505;
+}
+.date-cell {
+    width: 75px;
+    display: flex;
+    align-items: center;
+    width: 216px;
+    border: solid 1px #e1dcdc;
+    border-top: none;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.btns {
+    cursor: pointer;
+    color: grey;
+    width: 36px;
+    padding: 5px;
+    border-radius: 27px;
+    font-size: 23px;
+    background: #F2F2F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrap-time {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: solid 1px #e1dcdc;
+    border-top: solid 1px #e1dcdc;
+    height: 60px;
+     /* span{
+         height: 43px;
+     }  */
+}
+.time {
+    display: flex;
+    font-size: 11px;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    right: 16px;
+}
+.time-items {
+    margin-bottom: 48px;
+}
+.sep{
+    width: 96%;
+    position: absolute;
+    background: #ebe5e5;
+    height: 1.5px;
+    left: 40px;
+}
+.date {
+      padding: 6px;
+  }
+.events {
+      width: 100%;
+      word-wrap: break-word;
+  }
+.events-name{
+    word-wrap: break-word;
+    display: block;
+    font-weight: bold;
+}

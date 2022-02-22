@@ -1,7 +1,4 @@
-<app-header [month]="subscription$ | async"
-  (next)="onNext()"
-  (previous)="onPrevious()"
-  (getToday)="getToday()"
+<app-header
   (openAside)="openAside()">
 </app-header>
 <div class="main">
@@ -17,11 +14,11 @@
       </div>
       <div #child2 class="dropdown-child">
         <div class="holidays-wraper">
-          <input style="outline: 1px solid green;" #input type="checkbox" value="Dragan" (click)="onClick($event)">
+          <input style="background:green;" #input type="checkbox" value="Dragan" (click)="onClick($event)">
           <span>Dragan Calendar</span>
         </div>
         <div class="holidays-wraper">
-          <input style="outline: 1px solid red;" #input type="checkbox" value="Ivan" (click)="onClick($event)">
+          <input style="background:  red;" #input type="checkbox" value="Ivan" (click)="onClick($event)">
           <span>Ivan Calendar</span>
        </div>
       </div>
@@ -39,6 +36,6 @@
       </div>
   </aside>
   <div class="body">
-   <router-outlet (activate)="onActivate($event)"></router-outlet> 
+   <router-outlet></router-outlet> 
   </div>
 </div>

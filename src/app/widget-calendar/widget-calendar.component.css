@@ -4,12 +4,21 @@
     font-family: helvetica;
 }
 .selected {
-    background-color: #1876F2;
+    background-color: #AECBFA!important;
+  /*   padding: 5px; */
+    border-radius: 19px;
+    display: flex;
     color: white;
+    align-items: center;
+    justify-content: center;
 }
 .curr-date {
-    font-weight: bold;
-    background-color: white !important;
+       background-color: #1967D2 !important;
+   /*     padding: 5px; */
+       border-radius: 19px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
 }
 .container {
     width: 250px;
@@ -48,7 +57,7 @@
     color: #050505;
 }
 .date-cell {
-    padding: 6px;   
+   /*  padding: 6px;    */
     display: flex;
     width: 24px;
     border-radius: 8px;
@@ -70,4 +79,7 @@
 }
 .dates-before {
     color: grey;
+}
+.date-cell>span{
+    padding: 5px;
 }

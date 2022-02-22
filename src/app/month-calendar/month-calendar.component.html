@@ -3,15 +3,17 @@
         <div class="date-cell"  *ngFor="let date of dates let i = index">
             <span class="days">{{weekdays[i]}}</span>
             <span #d class="dates" 
-                 [class.curr-date]="isToday(date?.date)"
+                 [class.curr-date]="isToday(date)"
                  (click) ='onSelect($event)'>
-                 {{date?.date}}
+                 {{date}}
             </span>
-          <div *ngFor="let e of date?.events">
-            <div class="events"  [ngStyle]="{'color': e.color}" *ngIf="showCalendarOf.has(e?.owner)">
-                <span class="events-name">{{e?.name}}</span>
-                <span> {{e?.start}}</span>
-            </div> 
+          <div *ngFor="let e of allCalendars">
+              <div class="events" *ngIf="e.date == date" [ngStyle]="{'color': e.color}">
+                <span class="events-name">{{e.name}}</span>
+                <span> {{e.start}}</span>
+                <span> {{e.end}}</span>
+             </div> 
+           
           </div>
         </div>
     </div>

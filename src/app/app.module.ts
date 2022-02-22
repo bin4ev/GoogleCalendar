@@ -10,6 +10,7 @@ import { WidgetCalendarComponent } from './widget-calendar/widget-calendar.compo
 import { ViewCalendarsMenuComponent } from './header/view-calendars-menu/view-calendars-menu.component';
 import { DayCalendarComponent } from './day-calendar/day-calendar.component';
 import { WeekCalendarComponent } from './week-calendar/week-calendar.component';
+import { NavigatorComponent } from './header/navigator/navigator.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
     WidgetCalendarComponent,
     ViewCalendarsMenuComponent,
     DayCalendarComponent,
-    WeekCalendarComponent
+    WeekCalendarComponent,
+    NavigatorComponent
   ],
   imports: [
     BrowserModule,

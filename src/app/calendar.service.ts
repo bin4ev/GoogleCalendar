@@ -11,58 +11,57 @@ export class CalendarService {
   allEvents: any = {
     Ivan: [
       {
+        id: '1',
         name: 'Busy',
-        start: '12:30 PM',
-        date: '10/02',
+        start: '1:20 AM',
+        end: '3:00 AM',
+        date: '22/02',
         color: 'red'
       },
       {
+        id: '2',
         name: 'Dinner',
-        start: '10:30 PM',
-        date: '11/02',
+        start: '2:20 AM',
+        end: '4:00 AM',
+        date: '21/02',
         color: 'red'
       },
       {
+        id: '3',
         name: 'meeting Bussines',
-        start: '11:00 AM',
-        date: '13/03',
+        start: '3:50 AM',
+        end: '5:00 AM',
+        date: '23/02',
         color: 'red'
       },
       {
+        id: '4',
         name: 'Dentis ',
-        start: '11:00 AM',
-        date: '14/04',
+        start: '2:20 AM',
+        end: '5:00 AM',
+        date: '24/02',
         color: 'red'
       }
     ],
     Dragan: [
       {
-        name: 'Available',
-        start: '12:30 PM',
-        date: '10/02',
-        color: 'green'
-      },
-      {
-        name: 'Available',
-        start: '14:30 PM',
-        date: '11/02',
-        color: 'green'
-      },
-      {
+        id: '6',
         name: 'Doctor ',
-        start: '11:00 AM',
-        date: '13/03',
+        start: '2:20 AM',
+        end: '3:00 AM',
+        date: '25/02',
         color: 'green'
       },
       {
+        id: '7',
         name: 'JavaScript Course',
-        start: '11:00 AM',
-        date: '14/04',
+        start: '3:00 AM',
+        end: '3:50 AM',
+        date: '26/02',
         color: 'green'
       }
     ],
-
-    Holidays: this.holidays
+     holidays:[]
   }
 
   constructor() {
@@ -72,22 +71,32 @@ export class CalendarService {
       .catch((err) => console.error(err))
   }
 
-  getEventForsMonth(year: any, month: any) {
-    let res: any = {}
+  getEvents(names: any, month: any, start: any, end: any) {
+    let filtered = []
     for (let [key, value] of <Array<any>>Object.entries(this.allEvents)) {
       month = String(month).padStart(2, '0')
-      if (key != 'Holidays') {
-        let filtered = value.filter((x: any) => x.date.endsWith(month))
-        res[key] = filtered
-        continue
+      if (names.has(key)) {
+        for (let el of value) {
+          let [d, m] = el.date.split('/')
+          if (m == month && start <= Number(d) && end >= (d)) {
+            let obj = { ...el }
+            obj.startParse = this.parseTime(el.start)
+            obj.endParse = this.parseTime(el.end)
+            obj.date = Number(d)
+            filtered.push(obj)
+          }
+        }
       }
-
-      res[key] = this.holidays.filter((d: any) => {
-        let [, m] = d.date.split('-')
-        m == month
-      })
     }
+    return filtered
+  }
 
-    return res
+  private parseTime(time: string) {
+    let [h, min] = time.split(':')
+    let [m, format] = min.split(' ')
+    return {
+      hour: h+format,
+      min: m,
+    }
   }
 }

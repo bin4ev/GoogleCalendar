@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faAngleRight, faAngleLeft, faAngleDown, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { NavigationEnd, Router } from '@angular/router';
+import { UtilsService } from '../utils.service';
+import { filter } from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
@@ -7,11 +11,7 @@ import { faAngleRight, faAngleLeft, faAngleDown, faSearch } from '@fortawesome/f
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  @Input() month!: any
-
-  @Output() previous = new EventEmitter()
   @Output() next = new EventEmitter()
-  @Output() getToday = new EventEmitter()
   @Output() openAside = new EventEmitter()
 
   iconLeft = faAngleLeft
@@ -20,14 +20,21 @@ export class HeaderComponent {
   iconSearch = faSearch
 
   searchMode = false
+  currDate: Date = new Date()
   items: any = [
     { name: 'Day', shortcut: 'D', path: 'day' },
     { name: 'Month', shortcut: 'M', path: 'month' },
     { name: 'Week', shortcut: 'W', path: 'week' }
   ]
 
+  constructor(private utilService: UtilsService, private router: Router,) { }
+
   toggleSearchMode() {
     this.searchMode = !this.searchMode
   }
 
+  getToday() {
+    this.currDate = new Date()
+    this.utilService.setCurrDate(this.currDate)
+  }
 }

@@ -1,1 +1,40 @@
-<p>week-calendar works!</p>
+<div class="container">
+    <div class="dates-wrapper"> 
+        <div class="time">
+        <span  class="time-items" *ngFor="let t of time let i = index trackBy:trackById"
+         [ngStyle]="{'margin-top': i == 0 ? '71px' : '' }">{{t.time}}</span>
+        </div>
+        <div class="date-cell"
+             *ngFor="let date of dates let i = index trackBy:trackById">
+            <div class="days-wrapper">
+                 <span class="days">{{weekdays[i]}}</span>
+            </div>
+            <div class="dates">
+                <div class="date" [class.curr-date]="isToday(date.date)">
+                    <span #d  
+                    (click) ='onSelect($event)'>
+                    {{date.date}}
+                    </span>
+                </div>
+            </div> 
+            <div class="wrap-time" *ngFor="let t of time trackBy:trackById">
+                    <div *ngFor="let e of allCalendars trackBy:trackById"> 
+                        <div *ngIf="e.date==date.date">
+                            <div #events class="events"
+                            *ngIf="e.startParse.hour == t.time"
+                            [ngStyle]="{'border-color': e.color,
+                                        'height': e.duration+'px',
+                                        'top': e.startParse.min+'px',
+                                        'color': e.color}">
+                                <span class="events-name">{{e.name}}</span>
+                                <span> {{e.start}}</span>
+                                <span> {{e.end}}</span>
+                             </div>
+                        </div>
+                    </div>
+            
+            </div>
+          
+        </div>
+    </div>    
+</div>

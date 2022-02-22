@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons';
+import { UtilsService } from '../utils.service';
 
 const MS_IN_DAY = 100 * 60 * 60 * 24
 
@@ -34,18 +35,19 @@ export class WidgetCalendarComponent implements OnInit {
   disable = true
   matchDate = true
 
+  constructor( private utilService: UtilsService) {
+    this.utilService.getCurrDate$.subscribe(d => this.setDateView(d))
+  }
+
   ngOnInit(): void {
     this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
     this.setViewDates(this.firstDay)
   }
 
-  getTodayView() {
-    let d = new Date()
-    this.setDateView(d)
-  }
-
   setDateView(d: Date) {
+    this.currYear = d.getFullYear()
     this.currMonthIndex = d.getMonth()
+    this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
     this.currMonth = this.months[this.currMonthIndex];
     this.firstDay = new Date(d.getFullYear(), d.getMonth(), 1);
     this.setViewDates(this.firstDay)
@@ -61,15 +63,11 @@ export class WidgetCalendarComponent implements OnInit {
   }
 
   onSelect(e: any) {
-    if (this.checkDateIsAfter(e.target.textContent)) {
-      return
-    }
-
     if (this.selectedEl) {
       this.selectedEl.classList.remove('selected')
     }
-    e.target.parentElement.classList.add('selected')
-    this.selectedEl = e.target.parentElement
+    e.target.classList.add('selected')
+    this.selectedEl = e.target
     let date = new Date(this.currYear, this.currMonthIndex,e.target.textContent)
     this.sentCurrDate.emit(date)
   }
@@ -81,27 +79,29 @@ export class WidgetCalendarComponent implements OnInit {
       this.currYear--
     }
     if (this.currMonthIndex > 11) {
+      this.currMonthIndex = 0
       this.currYear++
     }
     this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
     this.currMonth = this.months[this.currMonthIndex % this.months.length]
+    this.utilService.setCurrDate(new Date(this.currYear, this.currMonthIndex,1))
+
   }
 
   next() {
-    this.matchDate = false
+    if (this.selectedEl) {
+      this.selectedEl.classList.remove('selected')
+    }
     this.pressedNext = true
     this.changeMonth()
     this.setViewDates(this.firstDay)
   }
 
   previous() {
-    if (this.currMonth == this.StartMouth) {
-      this.matchDate = true
-      return
+    if (this.selectedEl) {
+      this.selectedEl.classList.remove('selected')
     }
-
-    this.matchDate = false
-    this.pressedNext = false
+    this.pressedNext = false 
     this.changeMonth()
     this.firstDay = new Date(this.currYear, this.currMonthIndex, 1);
     this.setViewDates(this.firstDay)

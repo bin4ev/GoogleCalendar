@@ -12,12 +12,12 @@ const MS_IN_DAY = 100 * 60 * 60 * 24
   templateUrl: './month-calendar.component.html',
   styleUrls: ['./month-calendar.component.css']
 })
-export class MonthCalendarComponent implements OnInit, OnDestroy {
+export class MonthCalendarComponent implements OnDestroy {
   @Output() sentCurrDate = new EventEmitter()
   @Output() sentCurrMonth = new EventEmitter()
 
   @Input() events!: Event[]
-  @Input() showCalendarOf = new Set()
+
 
   iconLeft = faCaretLeft
   iconRight = faCaretRight
@@ -45,33 +45,31 @@ export class MonthCalendarComponent implements OnInit, OnDestroy {
   start!: string
   end!: string
   name!: string
-  allCalendars: any = {}
+  allCalendars: any 
+  showCalendarOf!: any
 
   constructor(private calendarService: CalendarService, private utilService: UtilsService) {
-    this.subscribtion = this.utilService.data$.subscribe(d => this.showCalendarOf = d)
-    this.utilService.getCurrMonth(`${this.currMonth}, ${this.currYear}`)
+    this.subscribtion = this.utilService.data$.subscribe(d =>{
+      this.showCalendarOf = d
+      this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
+      this.allCalendars = this.calendarService.getEvents(this.showCalendarOf, this.currMonthIndex + 1, 1, this.daysForMonth)
+      console.log(JSON.stringify(this.allCalendars));
+    })
+    this.utilService.getCurrDate$.subscribe(d => this.setDateView(d))
   }
 
-  ngOnInit(): void {
-    this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
-    this.allCalendars = this.calendarService.getEventForsMonth(this.currYear, this.currMonthIndex + 1)
-    this.setViewDates(this.firstDay)
-    this.sentCurrMonth.emit(`${this.currMonth}, ${this.currYear}`)
-    console.log(this.allCalendars);
-  }
 
-  getTodayView() {
-    let d = new Date()
-    this.setDateView(d)
-    this.utilService.getCurrMonth(`${this.currMonth}, ${this.currYear}`)
-  }
 
+  trackByMethod(index: number, event: any) {
+    return event.id
+  }
+  
   setDateView(d: Date) {
     this.currMonthIndex = d.getMonth()
+    this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
     this.currMonth = this.months[this.currMonthIndex];
     this.firstDay = new Date(d.getFullYear(), d.getMonth(), 1);
     this.setViewDates(this.firstDay)
-    this.sentCurrMonth.emit(`${this.currMonth} ${this.currYear}`)
   }
 
   checkDateIsAfter(date: number): boolean {
@@ -106,9 +104,7 @@ export class MonthCalendarComponent implements OnInit, OnDestroy {
     }
     this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
     this.currMonth = this.months[this.currMonthIndex % this.months.length]
-    this.sentCurrMonth.emit(`${this.currMonth}, ${this.currYear}`)
-    this.utilService.getCurrMonth(`${this.currMonth}, ${this.currYear}`)
-    this.allCalendars = this.calendarService.getEventForsMonth(this.currYear, this.currMonthIndex + 1)
+    this.allCalendars = this.calendarService.getEvents(this.showCalendarOf, this.currMonthIndex + 1, 1, this.daysForMonth)
   }
 
   next() {
@@ -135,18 +131,15 @@ export class MonthCalendarComponent implements OnInit, OnDestroy {
     let start = d.getDay()
     let dates = []
     for (let i = start, j = 0; j < this.daysForMonth; i++, j++) {
-      dates[i] = {
-        date: d.getDate()
-      }
-      this.checkEvents(dates[i], this.allCalendars)
+      dates[i] = d.getDate()
       d.setDate(d.getDate() + 1)
     }
     this.dates = dates
   }
 
-  checkEvents(objDate: any, allCalendars: any) {
+  checkEvents(objDate: any) {
     objDate.events = []
-    for (let [key, value] of <Array<any>>Object.entries(allCalendars)) {
+    for (let [key, value] of <Array<any>>Object.entries(this.allCalendars)) {
       if (key == 'Holidays') {
         this.checkForHolidays(objDate, key, value)
         continue
@@ -154,7 +147,7 @@ export class MonthCalendarComponent implements OnInit, OnDestroy {
       for (let e of value) {
         let [d, month] = e.date.split('/')
         if (Number(d) == objDate.date && Number(month) == this.currMonthIndex + 1) {
-          objDate.events.push({ owner: key, ...e })
+          objDate.events.push(e)
         }
       }
     }
@@ -170,7 +163,6 @@ export class MonthCalendarComponent implements OnInit, OnDestroy {
       }
     }
   }
-
 
   getLastSunday(year: any, month: any) {
     let d = new Date(year, month, 0);

@@ -4,14 +4,14 @@
     box-sizing:border-box;
     font-family: helvetica;
 }
-body {
-    height: 100vh;
-}
+
 .main {
     display: flex;
+    margin-top: 10px;
 }
 .body {
     width: 100%;
+   
 }
 .sidebar {
     margin-top: 15px;
@@ -23,6 +23,8 @@ body {
 }
 .holidays-wraper {
     margin-top: 20px;
+    display: flex;
+    align-items: center;
 }
 .big-btn {
     border-bottom: solid 3px #c9c4c4;
@@ -75,13 +77,29 @@ img {
     display: none;
     min-width: 200px;
 }
-input[type=checkbox] {
-    outline: none;
+input[type='checkbox']{
+    width: 14px !important;
+    height: 14px !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    outline: 1px solid gray;
+    box-shadow: none;
+    font-size: 0.8em;
+    text-align: center;
+  }
+  
+  input[type='checkbox']:checked:after {
+    content: '✔';
+    color: white;
+  }
 
-
-}
-input[type=checkbox]:checked {
-    background-color: inherit
+.events {
+    border: solid 0.2px;
+    border-radius: 3px;
+    background: white;
+    position: relative;
 }
 
 

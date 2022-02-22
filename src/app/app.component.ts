@@ -36,20 +36,13 @@ export class AppComponent {
   iconDown = faAngleDown
   iconUp = faAngleUp
 
+  activeComponent!: any
   monthCalendarComponent!: MonthCalendarComponent
-  subscription$!: any
-  currMonth!: string
   open = false
   showCalendarOn: any = new Set()
 
   constructor(private utilsService: UtilsService) {
-    this.subscription$ = this.utilsService.month$
-  }
-
-  onActivate(componentRef: any) {
-    if (componentRef instanceof MonthCalendarComponent) {
-      this.monthCalendarComponent = componentRef
-    }
+  
   }
 
   onClick(e: any) {
@@ -58,27 +51,16 @@ export class AppComponent {
   }
 
   setDate(d: Date) {
-    this.monthCalendarComponent.setDateView(d)
+    this.utilsService.setCurrDate(d)
   }
 
   openAside() {
     this.aside.nativeElement.style.width = this.open ? '0px' : '25%'
+    setTimeout(() => {
+      this.aside.nativeElement.style.overflowX = this.open ? 'visible' : 'hidden'
+    }, 100);
+
     this.open = !this.open
-  }
-
-  getToday() {
-    this.monthCalendarComponent.getTodayView()
-    this.widgetCalendarComponent.getTodayView()
-  }
-
-  onNext() {
-    this.monthCalendarComponent.next()
-    this.widgetCalendarComponent.next()
-  }
-
-  onPrevious() {
-    this.monthCalendarComponent.previous()
-    this.widgetCalendarComponent.previous()
   }
 
   showDropdownMenu(e: any) {
