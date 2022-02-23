@@ -59,7 +59,7 @@ export class NavigatorComponent  {
   }
 
   navigateWeek(e: any) {
-    let days = e.currentTarget.firstElementChild.id == 'previous' ? 7 : -7
+    let days = e.currentTarget.firstElementChild.id == 'previous' ? -7 : 7
     this.currDate.setDate(this.currDate.getDate() + days)
     this.setTitle()
     this.utilService.setCurrDate(this.currDate)

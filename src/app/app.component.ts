@@ -1,17 +1,15 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MonthCalendarComponent } from './month-calendar/month-calendar.component';
+import {ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { Event } from './events';
-import { WidgetCalendarComponent } from './widget-calendar/widget-calendar.component';
 import { faAngleDown, faAnglesUp, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { UtilsService } from './utils.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+/*   changeDetection: ChangeDetectionStrategy.OnPush */
 })
 export class AppComponent {
-  @ViewChild(WidgetCalendarComponent) widgetCalendarComponent!: WidgetCalendarComponent
   @ViewChild('aside') aside!: ElementRef
   @ViewChild('input') input!: ElementRef
 
@@ -37,7 +35,6 @@ export class AppComponent {
   iconUp = faAngleUp
 
   activeComponent!: any
-  monthCalendarComponent!: MonthCalendarComponent
   open = false
   showCalendarOn: any = new Set()
 

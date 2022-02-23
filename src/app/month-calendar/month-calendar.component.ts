@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import { Event } from '../events';
 import { CalendarService } from '../calendar.service'
@@ -10,7 +10,8 @@ const MS_IN_DAY = 100 * 60 * 60 * 24
 @Component({
   selector: 'month-calendar',
   templateUrl: './month-calendar.component.html',
-  styleUrls: ['./month-calendar.component.css']
+  styleUrls: ['./month-calendar.component.css'],
+/*   changeDetection: ChangeDetectionStrategy.OnPush  */
 })
 export class MonthCalendarComponent implements OnDestroy {
   @Output() sentCurrDate = new EventEmitter()
@@ -57,8 +58,6 @@ export class MonthCalendarComponent implements OnDestroy {
     })
     this.utilService.getCurrDate$.subscribe(d => this.setDateView(d))
   }
-
-
 
   trackByMethod(index: number, event: any) {
     return event.id
