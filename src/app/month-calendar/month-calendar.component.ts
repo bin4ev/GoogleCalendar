@@ -1,24 +1,19 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import { Event } from '../events';
 import { CalendarService } from '../calendar.service'
 import { UtilsService } from '../utils.service';
 import { Subscription } from 'rxjs';
 
-const MS_IN_DAY = 100 * 60 * 60 * 24
-
 @Component({
   selector: 'month-calendar',
   templateUrl: './month-calendar.component.html',
   styleUrls: ['./month-calendar.component.css'],
-/*   changeDetection: ChangeDetectionStrategy.OnPush  */
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MonthCalendarComponent implements OnDestroy {
   @Output() sentCurrDate = new EventEmitter()
   @Output() sentCurrMonth = new EventEmitter()
-
-  @Input() events!: Event[]
-
 
   iconLeft = faCaretLeft
   iconRight = faCaretRight
@@ -46,23 +41,25 @@ export class MonthCalendarComponent implements OnDestroy {
   start!: string
   end!: string
   name!: string
-  allCalendars: any 
+  allCalendars: any
   showCalendarOf!: any
 
-  constructor(private calendarService: CalendarService, private utilService: UtilsService) {
-    this.subscribtion = this.utilService.data$.subscribe(d =>{
+  constructor(private changeDetector : ChangeDetectorRef, private calendarService: CalendarService, private utilService: UtilsService) {
+    this.subscribtion = this.utilService.data$.subscribe(d => {
       this.showCalendarOf = d
       this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
       this.allCalendars = this.calendarService.getEvents(this.showCalendarOf, this.currMonthIndex + 1, 1, this.daysForMonth)
-      console.log(JSON.stringify(this.allCalendars));
+      this.changeDetector.detectChanges()
     })
-    this.utilService.getCurrDate$.subscribe(d => this.setDateView(d))
+    this.utilService.getCurrDate$.subscribe(d =>{
+      this.setDateView(d)
+      this.changeDetector.detectChanges()})
   }
 
   trackByMethod(index: number, event: any) {
     return event.id
   }
-  
+
   setDateView(d: Date) {
     this.currMonthIndex = d.getMonth()
     this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)

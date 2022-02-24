@@ -7,29 +7,10 @@ import { UtilsService } from './utils.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-/*   changeDetection: ChangeDetectionStrategy.OnPush */
 })
 export class AppComponent {
   @ViewChild('aside') aside!: ElementRef
   @ViewChild('input') input!: ElementRef
-
-  events: Event[] = [
-    {
-      name: 'Available',
-      start: '12:30 PM',
-      date: '10/02'
-    },
-    {
-      name: 'Angular Intern',
-      start: '11:00 AM',
-      date: '13/02'
-    },
-    {
-      name: 'Angular Intern',
-      start: '11:00 AM',
-      date: '14/02'
-    }
-  ]
 
   iconDown = faAngleDown
   iconUp = faAngleUp
