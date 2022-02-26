@@ -43,7 +43,23 @@
     justify-content: space-around;
     margin-left: 20px;
     padding: 25px;
+    overflow-x: scroll;
+    height: 100vh;
+    height: 100vh;
 }
+.dates-wrapper::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 10px;
+    
+}
+ .dates-wrapper::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.dates-wrapper::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 10px;
+} 
 .dates {
     font-size: 30px;
     width: 100%;
@@ -61,11 +77,12 @@
     width: 75px;
     display: flex;
     align-items: center;
-    width: 216px;
+    width: 100%;
     border: solid 1px #e1dcdc;
     border-top: none;
     justify-content: flex-start;
     flex-direction: column;
+    height: 1458px;
 }
 .btns {
     cursor: pointer;
@@ -86,7 +103,7 @@
     width: 100%;
     border-bottom: solid 1px #e1dcdc;
     border-top: solid 1px #e1dcdc;
-    height: 60px;
+    min-height: 60px;
      /* span{
          height: 43px;
      }  */

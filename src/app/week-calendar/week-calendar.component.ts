@@ -3,9 +3,6 @@ import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import { CalendarService } from '../calendar.service';
 import { UtilsService } from '../utils.service';
 
-const MS_IN_DAY = 100 * 60 * 60 * 24
-const CELL_HEIGHT = 60
-
 @Component({
   selector: 'week-calendar',
   templateUrl: './week-calendar.component.html',

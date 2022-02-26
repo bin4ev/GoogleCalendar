@@ -49,14 +49,14 @@ export class MonthCalendarComponent implements OnDestroy {
       this.showCalendarOf = d
       this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
       this.allCalendars = this.calendarService.getEvents(this.showCalendarOf, this.currMonthIndex + 1, 1, this.daysForMonth)
-      this.changeDetector.detectChanges()
+      this.changeDetector.markForCheck()
     })
     this.utilService.getCurrDate$.subscribe(d =>{
       this.setDateView(d)
-      this.changeDetector.detectChanges()})
+      this.changeDetector.markForCheck()})
   }
 
-  trackByMethod(index: number, event: any) {
+  trackByMethod(_:any, event: any) {
     return event.id
   }
 

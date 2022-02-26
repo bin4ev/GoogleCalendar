@@ -1,15 +1,42 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Renderer2 } from '@angular/core';
 import { faAngleRight, faAngleLeft, faAngleDown, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { NavigationEnd, Router } from '@angular/router';
-import { UtilsService } from '../../utils.service';
 import { filter } from 'rxjs';
+
+import { UtilsService } from '../../utils.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-navigator',
   templateUrl: './navigator.component.html',
-  styleUrls: ['./navigator.component.scss']
+  styleUrls: ['./navigator.component.scss'],
+   animations:[
+     trigger('showHide',[
+      transition(':enter',[
+        style({ width:'0px',
+                height:'0px',
+                top:'120px',
+                left:'520px'
+              }),
+        animate('0.13s',
+        style({ width: '250px',
+                height:'250px',
+                top:'20px',
+                left:'410px'
+              }))
+      ]),
+      transition(':leave',[
+        animate('0.13s',
+         style({ width:'0px',
+                 left:'520px',
+                 top:'120px',
+                 height:'0px',
+      }))
+      ])
+     ])
+  ]
 })
-export class NavigatorComponent  {
+export class NavigatorComponent {
   @Output() next = new EventEmitter()
   @Output() openAside = new EventEmitter()
 
@@ -22,8 +49,12 @@ export class NavigatorComponent  {
   currDate: Date = new Date()
   title!: string
   currViewPath!: any
+  showWidget = false
+  removeOnClick!: any
 
-  constructor(private utilService: UtilsService, private router: Router,) {
+  constructor(private utilService: UtilsService,
+    private router: Router,
+    private render: Renderer2) {
     this.router.events.pipe(
       filter(e => e instanceof NavigationEnd)
     ).subscribe(path => this.currViewPath = path)
@@ -36,6 +67,11 @@ export class NavigatorComponent  {
 
   ngOnInit() {
     this.setTitle()
+    this.removeOnClick = this.render.listen('document', 'mousedown',() => this.showWidget = false)
+  }
+
+  showCalendar() {
+    this.showWidget = !this.showWidget
   }
 
   navigateMonth(e: any) {
@@ -67,7 +103,16 @@ export class NavigatorComponent  {
 
   setTitle() {
     let currMonth = this.currDate.toLocaleString('default', { month: 'long' });
-    this.title = currMonth + ' ' + this.currDate.getFullYear()
+    let currYear = this.currDate.getFullYear()
+    let lastSundayDate = this.getLastSunday()
+    if (this.currDate.getDate() != lastSundayDate.getDate()) {
+      this.title = `${currMonth} ${currYear}`
+      return
+    }
+
+    let nextMonthDate = new Date(currYear, this.currDate.getMonth() + 1, 1);
+    let nextMonth = nextMonthDate.toLocaleString('default', { month: 'long' })
+    this.title = `${currMonth}-${nextMonth} ${currYear}`
   }
 
   navigate(e: any) {
@@ -86,6 +131,9 @@ export class NavigatorComponent  {
     }
   }
 
-
-
+  getLastSunday() {
+    let d = new Date(this.currDate.getFullYear(), this.currDate.getMonth() + 1, 0);
+    d.setDate(d.getDate() - d.getDay());
+    return d;
+  }
 }

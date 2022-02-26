@@ -2,7 +2,7 @@
     <fa-icon [icon]="iconDown"></fa-icon>
 </div>
 <div >
-    <section #section class="container">
+    <section #section class="container" [ngClass]="{'show': showMenuButton, 'hide' : !showMenuButton}">
         <div class="container-items"  [style.display]="showMenuButton ? 'flex' : 'none'"
         *ngFor="let item of items" 
         (click)="changeState(item.name)"

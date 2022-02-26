@@ -1,11 +1,23 @@
 <div class="nav-bar-middle">
     <li class="navigate-wraper">
-        <div class="btns"  (click)="navigate($event)">
-            <span id="previous"><fa-icon class="icon" [icon]="iconLeft"></fa-icon></span>
+        <div class="btns" (click)="navigate($event)">
+            <span id="previous">
+                <fa-icon class="icon" [icon]="iconLeft"></fa-icon>
+            </span>
         </div>
         <div class="btns" (click)="navigate($event)">
-            <span id="next"><fa-icon [icon]="iconRight"></fa-icon></span>
+            <span id="next">
+                <fa-icon [icon]="iconRight"></fa-icon>
+            </span>
         </div>
     </li>
-    <li class="month-title" >{{title}}</li>
+    <li class="month-title">{{title}}</li>
+    <div class="btns" style="font-size: 15px; margin-left: 5px;" (click)="showCalendar()">
+        <span id="down">
+            <fa-icon [icon]="iconDown"></fa-icon>
+        </span>
+    </div>
+    <div class="widget-calendar" *ngIf="showWidget" @showHide>
+        <widget-calendar></widget-calendar>
+    </div>
 </div>
