@@ -1,13 +1,13 @@
 <nav *ngIf="!searchMode">
     <ul class="nav-bar-left">
-        <li class="main-menu" (click)="openAside.emit()">☰</li>
+        <li class="main-menu" (click)="openAsideMenu()">☰</li>
         <li class="logo">
             <img src="https://frejun.com/wp-content/uploads/2021/10/google-calendar-2.png" alt="">
         </li>
     </ul>
     <ul class="nav-bar-middle">
         <li class="btn" (click)="getToday()">Today</li>
-        <app-navigator></app-navigator>
+        <app-navigator [show]="showCalendarWidget"></app-navigator>
     </ul>
     <ul class="nav-bar-right">
         <li class="main-menu" (click)="toggleSearchMode()">

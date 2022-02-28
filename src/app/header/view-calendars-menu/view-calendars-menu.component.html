@@ -2,8 +2,8 @@
     <fa-icon [icon]="iconDown"></fa-icon>
 </div>
 <div >
-    <section #section class="container" [ngClass]="{'show': showMenuButton, 'hide' : !showMenuButton}">
-        <div class="container-items"  [style.display]="showMenuButton ? 'flex' : 'none'"
+    <section #section class="container" *ngIf="showMenuButton" @showHide>
+        <div class="container-items"
         *ngFor="let item of items" 
         (click)="changeState(item.name)"
         [routerLink]="[item.name.toLowerCase()]">

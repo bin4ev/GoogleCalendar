@@ -21,6 +21,7 @@ export class HeaderComponent {
 
   searchMode = false
   currDate: Date = new Date()
+  showCalendarWidget = true
   items: any = [
     { name: 'Day', shortcut: 'D', path: 'day' },
     { name: 'Month', shortcut: 'M', path: 'month' },
@@ -36,5 +37,10 @@ export class HeaderComponent {
   getToday() {
     this.currDate = new Date()
     this.utilService.setCurrDate(this.currDate)
+  }
+
+  openAsideMenu(){
+    this.openAside.emit()
+    this.showCalendarWidget = !this.showCalendarWidget
   }
 }

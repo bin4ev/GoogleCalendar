@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 import { faAngleRight, faAngleLeft, faAngleDown, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
@@ -10,33 +10,38 @@ import { animate, style, transition, trigger } from '@angular/animations';
   selector: 'app-navigator',
   templateUrl: './navigator.component.html',
   styleUrls: ['./navigator.component.scss'],
-   animations:[
-     trigger('showHide',[
-      transition(':enter',[
-        style({ width:'0px',
-                height:'0px',
-                top:'120px',
-                left:'520px'
-              }),
+  animations: [
+    trigger('showHide', [
+      transition(':enter', [
+        style({
+          width: '0px',
+          height: '0px',
+          top: '120px',
+          left: '520px'
+        }),
         animate('0.13s',
-        style({ width: '250px',
-                height:'250px',
-                top:'20px',
-                left:'410px'
-              }))
+          style({
+            width: '250px',
+            height: '250px',
+            top: '20px',
+            left: '410px'
+          }))
       ]),
-      transition(':leave',[
+      transition(':leave', [
         animate('0.13s',
-         style({ width:'0px',
-                 left:'520px',
-                 top:'120px',
-                 height:'0px',
-      }))
+          style({
+            width: '0px',
+            left: '520px',
+            top: '120px',
+            height: '0px',
+          }))
       ])
-     ])
+    ])
   ]
 })
 export class NavigatorComponent {
+  @Input() show = false
+
   @Output() next = new EventEmitter()
   @Output() openAside = new EventEmitter()
 
@@ -67,7 +72,11 @@ export class NavigatorComponent {
 
   ngOnInit() {
     this.setTitle()
-    this.removeOnClick = this.render.listen('document', 'mousedown',() => this.showWidget = false)
+    this.removeOnClick = this.render.listen('document', 'mousedown', () => this.showWidget = false)
+  }
+
+  stopPopagate(e: any) {
+    e.stopPropagation()
   }
 
   showCalendar() {

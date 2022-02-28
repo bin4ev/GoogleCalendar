@@ -14,19 +14,22 @@
 .container {
     margin-top: 10px;
     position: absolute;
-    width: 0%;
-    top: 40px;
-    height: 0px;
+    width: 17%;
+    height: 140px;
+    top: 50px;
     background: #FFFFFF;
     box-shadow: 0px 4px 17px 4px #e2dada;
     z-index: 1;
-    transition:  0.05s,  0.05s;
- 
+}
+.container-items:active{
+    background: rgb(223,225,228);
+    background: linear-gradient(90deg, rgba(223,225,228,1) 23%, rgba(173,157,157,1) 51%, rgba(110,116,116,0.011642156862745057) 72%);
 }
 .container-items {
     display: flex;
     justify-content: space-between;
     padding: 0px 10px;
+    overflow: hidden;
     cursor: pointer;
 }
 .days{

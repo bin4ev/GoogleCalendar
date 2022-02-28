@@ -12,12 +12,12 @@
         </div>
     </li>
     <li class="month-title">{{title}}</li>
-    <div class="btns" style="font-size: 15px; margin-left: 5px;" (click)="showCalendar()">
+    <div class="btns" style="font-size: 15px; margin-left: 5px;" *ngIf="show" (click)="showCalendar()">
         <span id="down">
             <fa-icon [icon]="iconDown"></fa-icon>
         </span>
     </div>
-    <div class="widget-calendar" *ngIf="showWidget" @showHide>
+    <div class="widget-calendar"  (mousedown)="stopPopagate($event)" *ngIf="showWidget" @showHide>
         <widget-calendar></widget-calendar>
     </div>
 </div>
