@@ -12,7 +12,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
         style({width: '0%',
           top:' 25px',
           height:' 0px'}),
-        animate('100ms'),
+        animate('101ms'),
       ])
     ]),
   ]
