@@ -15,7 +15,7 @@ export class CalendarService {
         name: 'Busy',
         start: '1:20 AM',
         end: '3:00 AM',
-        date: '22/02',
+        date: '07/03',
         color: 'red'
       },
       {
@@ -23,7 +23,7 @@ export class CalendarService {
         name: 'Dinner',
         start: '2:20 AM',
         end: '4:00 AM',
-        date: '21/02',
+        date: '14/03',
         color: 'red'
       },
       {
@@ -31,7 +31,7 @@ export class CalendarService {
         name: 'meeting Bussines',
         start: '3:50 AM',
         end: '5:00 AM',
-        date: '23/02',
+        date: '13/03',
         color: 'red'
       },
       {
@@ -39,7 +39,7 @@ export class CalendarService {
         name: 'Dentis ',
         start: '2:20 AM',
         end: '5:00 AM',
-        date: '24/02',
+        date: '12/03',
         color: 'red'
       }
     ],
@@ -49,7 +49,7 @@ export class CalendarService {
         name: 'Doctor ',
         start: '2:20 AM',
         end: '3:00 AM',
-        date: '25/02',
+        date: '09/03',
         color: 'green'
       },
       {
@@ -57,7 +57,7 @@ export class CalendarService {
         name: 'JavaScript Course',
         start: '3:00 AM',
         end: '3:50 AM',
-        date: '26/02',
+        date: '10/03',
         color: 'green'
       }
     ],
