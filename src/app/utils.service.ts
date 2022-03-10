@@ -5,9 +5,9 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class UtilsService {
-  d = new Date()
+  
   private setShowCalendar = new BehaviorSubject(new Set());
-  private setDateSource = new BehaviorSubject(this.d)
+  private setDateSource = new BehaviorSubject( new Date())
 
 data$ = this.setShowCalendar.asObservable()
 getCurrDate$ = this.setDateSource.asObservable()

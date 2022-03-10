@@ -9,7 +9,7 @@ const MS_IN_DAY = 100 * 60 * 60 * 24
   templateUrl: './widget-calendar.component.html',
   styleUrls: ['./widget-calendar.component.css'],
 })
-export class WidgetCalendarComponent implements OnInit {
+export class WidgetCalendarComponent  {
   @Output() sentCurrDate = new EventEmitter
 
   iconLeft = faCaretLeft
@@ -39,10 +39,10 @@ export class WidgetCalendarComponent implements OnInit {
     this.utilService.getCurrDate$.subscribe(d => this.setDateView(d))
   }
 
-  ngOnInit(): void {
+/*   ngOnInit(): void {
     this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
     this.setViewDates(this.firstDay)
-  }
+  } */
 
   setDateView(d: Date) {
     this.currYear = d.getFullYear()

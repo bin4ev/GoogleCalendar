@@ -63,17 +63,21 @@ export class WeekCalendarComponent {
     this.utilService.getCurrDate$.subscribe(d => {
       this.setDateView(d)
     })
-    this.utilService.data$.subscribe(d => {
+    this.utilService.data$.subscribe(d => {     
       this.showCalendarOf = d
-      this.allCalendars = this.calendarService.getEvents(this.showCalendarOf, this.currMonthIndex + 1, this.currDay.getDate(), this.currDay.getDate() + 7)
-      for (let event of this.allCalendars) {
-        this.parseDurationEvent(event)
-      }
+      this.getAllCalendars()
     })
   }
 
   trackById(index: number, el: any) {
     return el.id
+  }
+
+  getAllCalendars(){
+    this.allCalendars = this.calendarService.getEvents(this.showCalendarOf, this.currMonthIndex + 1, this.currDay.getDate(), this.currDay.getDate() + 7)
+    for (let event of this.allCalendars) {
+      this.parseDurationEvent(event)
+    }
   }
 
   parseDurationEvent(event: any) {
@@ -88,6 +92,7 @@ export class WeekCalendarComponent {
     this.currMonth = this.months[this.currMonthIndex];
     this.currDay = d
     this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
+    this.getAllCalendars()
     this.setViewDates(this.currDay)
   }
 

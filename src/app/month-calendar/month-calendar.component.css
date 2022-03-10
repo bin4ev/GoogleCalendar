@@ -40,11 +40,11 @@
     color: #70757a;
 }
 .dates-wrapper {
-    flex-wrap: wrap;
     cursor: pointer;
     margin-top: 15px;
     font-size: 16px;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(7,14%);
 }
 .title {
     font-size: 24px;
@@ -52,14 +52,13 @@
     color: #050505;
 }
 .date-cell {
-    width: 14%;
+    width: 100%;
     height: 120px;
-    align-content: center;
-    justify-content: flex-start;
     border: 1px solid #DADCE0;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 .btns {
     cursor: pointer;

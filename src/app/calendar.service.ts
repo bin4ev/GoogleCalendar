@@ -71,11 +71,11 @@ export class CalendarService {
       .catch((err) => console.error(err))
   }
 
-  getEvents(names: any, month: any, start: any, end: any) {
+  getEvents(names: any, month: any, start: any, end: any) {    
     let filtered = []
     for (let [key, value] of <Array<any>>Object.entries(this.allEvents)) {
       month = String(month).padStart(2, '0')
-      if (names.has(key)) {
+      if (names?.has(key)) {
         for (let el of value) {
           let [d, m] = el.date.split('/')
           if (m == month && start <= Number(d) && end >= (d)) {

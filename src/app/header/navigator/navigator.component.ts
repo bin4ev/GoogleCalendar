@@ -113,7 +113,8 @@ export class NavigatorComponent {
   setTitle() {
     let currMonth = this.currDate.toLocaleString('default', { month: 'long' });
     let currYear = this.currDate.getFullYear()
-    let lastSundayDate = this.getLastSunday()
+    this.title = `${currMonth} ${currYear}`
+  /*   let lastSundayDate = this.getLastSunday()
     if (this.currDate.getDate() != lastSundayDate.getDate()) {
       this.title = `${currMonth} ${currYear}`
       return
@@ -121,7 +122,7 @@ export class NavigatorComponent {
 
     let nextMonthDate = new Date(currYear, this.currDate.getMonth() + 1, 1);
     let nextMonth = nextMonthDate.toLocaleString('default', { month: 'long' })
-    this.title = `${currMonth}-${nextMonth} ${currYear}`
+    this.title = `${currMonth}-${nextMonth} ${currYear}` */
   }
 
   navigate(e: any) {

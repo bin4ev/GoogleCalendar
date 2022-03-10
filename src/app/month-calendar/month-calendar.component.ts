@@ -49,7 +49,7 @@ export class MonthCalendarComponent implements OnDestroy {
       this.showCalendarOf = d
       this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
       this.allCalendars = this.calendarService.getEvents(this.showCalendarOf, this.currMonthIndex + 1, 1, this.daysForMonth)
-      this.changeDetector.markForCheck()
+      this.changeDetector.markForCheck()     
     })
     this.utilService.getCurrDate$.subscribe(d =>{
       this.setDateView(d)
@@ -65,6 +65,7 @@ export class MonthCalendarComponent implements OnDestroy {
     this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
     this.currMonth = this.months[this.currMonthIndex];
     this.firstDay = new Date(d.getFullYear(), d.getMonth(), 1);
+    this.allCalendars = this.calendarService.getEvents(this.showCalendarOf, this.currMonthIndex + 1, 1, this.daysForMonth)
     this.setViewDates(this.firstDay)
   }
 
