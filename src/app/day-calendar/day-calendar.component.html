@@ -1,1 +1,29 @@
-<p>day-calendar works!</p>
+<div class="container">
+    <div class="dates-wrapper"> 
+        <div class="dates">
+            <div class="days">{{weekdays[currDay.getDay()]}}</div>
+            <div class="date" [class.curr-date]="isToday(currDay.getDate())">
+              {{currDay.getDate()}}
+            </div>
+        </div> 
+        <div class="date-cell"
+        *ngFor="let t of time let i = index ">
+        <span class="time-items">{{t.time}}</span>
+                 <div class="events-wrap" *ngFor="let e of allCalendars let i = index"> 
+                    <div #events class="events" *ngIf="e.startParse.hour == t.time"
+                         [ngStyle]="{
+                             'background': e.color,
+                             'height': e.duration + 'px',
+                             'top': e.startParse.min + 'px',
+                             'width': e.width,
+                             'z-index': e.zIndex,
+                             'left': e.left
+                            }">
+                            <span class="events-name">{{e.name}}</span>
+                            <span> {{e.start}}-{{e.end}}</span>
+                          
+                    </div>
+                 </div>        
+        </div>
+    </div>    
+</div>

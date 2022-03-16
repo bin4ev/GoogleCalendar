@@ -33,7 +33,7 @@ export class AppComponent {
   }
 
   openAside() {
-    this.aside.nativeElement.style.width = this.open ? '0px' : '25%'
+    this.aside.nativeElement.style.width = this.open ? '0px' : '19%'
     setTimeout(() => {
       this.aside.nativeElement.style.overflowX = this.open ? 'visible' : 'hidden'
     }, 100);

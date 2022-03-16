@@ -45,15 +45,19 @@ export class MonthCalendarComponent implements OnDestroy {
   showCalendarOf!: any
 
   constructor(private changeDetector : ChangeDetectorRef, private calendarService: CalendarService, private utilService: UtilsService) {
+
+  }
+
+  ngOnInit(){
     this.subscribtion = this.utilService.data$.subscribe(d => {
       this.showCalendarOf = d
       this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
       this.allCalendars = this.calendarService.getEvents(this.showCalendarOf, this.currMonthIndex + 1, 1, this.daysForMonth)
-      this.changeDetector.markForCheck()     
+      this.changeDetector.detectChanges()     
     })
     this.utilService.getCurrDate$.subscribe(d =>{
       this.setDateView(d)
-      this.changeDetector.markForCheck()})
+      this.changeDetector.detectChanges()})
   }
 
   trackByMethod(_:any, event: any) {

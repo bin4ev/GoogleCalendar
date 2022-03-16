@@ -13,25 +13,25 @@ export class CalendarService {
       {
         id: '1',
         name: 'Busy',
-        start: '1:20 AM',
-        end: '3:00 AM',
-        date: '07/03',
+        start: '9:20 AM',
+        end: '10:50 AM',
+        date: '14/03',
         color: 'red'
       },
       {
         id: '2',
         name: 'Dinner',
-        start: '2:20 AM',
-        end: '4:00 AM',
+        start: '12:20 PM',
+        end: '14:00 AM',
         date: '14/03',
         color: 'red'
       },
       {
         id: '3',
-        name: 'meeting Bussines',
+        name: 'Meeting Bussines',
         start: '3:50 AM',
-        end: '5:00 AM',
-        date: '13/03',
+        end: '6:00 AM',
+        date: '15/03',
         color: 'red'
       },
       {
@@ -39,7 +39,7 @@ export class CalendarService {
         name: 'Dentis ',
         start: '2:20 AM',
         end: '5:00 AM',
-        date: '12/03',
+        date: '14/03',
         color: 'red'
       }
     ],
@@ -47,17 +47,17 @@ export class CalendarService {
       {
         id: '6',
         name: 'Doctor ',
-        start: '2:20 AM',
-        end: '3:00 AM',
-        date: '09/03',
+        start: '4:50 AM',
+        end: '6:00 AM',
+        date: '15/03',
         color: 'green'
       },
       {
         id: '7',
         name: 'JavaScript Course',
-        start: '3:00 AM',
-        end: '3:50 AM',
-        date: '10/03',
+        start: '9:00 AM',
+        end: '10:50 AM',
+        date: '14/03',
         color: 'green'
       }
     ],
@@ -91,11 +91,31 @@ export class CalendarService {
     return filtered
   }
 
+  getEventsForToday(names:any,date: Date){
+    let filtered = []
+    for (let [key, value] of <Array<any>>Object.entries(this.allEvents)) {
+     let day = String(date.getDate()).padStart(2, '0')
+      if (names?.has(key)) {
+        for (let el of value) {
+          let [d, m] = el.date.split('/')
+          if (m == date.getMonth() +1 && day == d) {
+            let obj = { ...el }
+            obj.startParse = this.parseTime(el.start)
+            obj.endParse = this.parseTime(el.end)
+            obj.date = Number(d)
+            filtered.push(obj)
+          }
+        }
+      }
+    }
+    return filtered
+  }
+
   private parseTime(time: string) {
     let [h, min] = time.split(':')
     let [m, format] = min.split(' ')
     return {
-      hour: h+format,
+      hour: h + format,
       min: m,
     }
   }

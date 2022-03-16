@@ -39,11 +39,6 @@ export class WidgetCalendarComponent  {
     this.utilService.getCurrDate$.subscribe(d => this.setDateView(d))
   }
 
-/*   ngOnInit(): void {
-    this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
-    this.setViewDates(this.firstDay)
-  } */
-
   setDateView(d: Date) {
     this.currYear = d.getFullYear()
     this.currMonthIndex = d.getMonth()
@@ -69,7 +64,8 @@ export class WidgetCalendarComponent  {
     e.target.classList.add('selected')
     this.selectedEl = e.target
     let date = new Date(this.currYear, this.currMonthIndex,e.target.textContent)
-    this.sentCurrDate.emit(date)
+   /*  this.sentCurrDate.emit(date) */
+   this.utilService.setCurrDate(date)
   }
 
   changeMonth() {
@@ -84,8 +80,6 @@ export class WidgetCalendarComponent  {
     }
     this.daysForMonth = this.getdaysFromMouths(this.currMonthIndex)
     this.currMonth = this.months[this.currMonthIndex % this.months.length]
-    this.utilService.setCurrDate(new Date(this.currYear, this.currMonthIndex,1))
-
   }
 
   next() {

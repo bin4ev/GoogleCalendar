@@ -56,6 +56,7 @@ export class NavigatorComponent {
   currViewPath!: any
   showWidget = false
   removeOnClick!: any
+  state!: string
 
   constructor(private utilService: UtilsService,
     private router: Router,
@@ -64,14 +65,13 @@ export class NavigatorComponent {
       filter(e => e instanceof NavigationEnd)
     ).subscribe(path => this.currViewPath = path)
 
-    this.utilService.getCurrDate$.subscribe(d => {
+    this.utilService.getCurrDate$.subscribe(d => {    
       this.currDate = d
       this.setTitle()
     })
   }
 
   ngOnInit() {
-    this.setTitle()
     this.removeOnClick = this.render.listen('document', 'mousedown', () => this.showWidget = false)
   }
 
@@ -110,28 +110,43 @@ export class NavigatorComponent {
     this.utilService.setCurrDate(this.currDate)
   }
 
+  navigationDay(e: any) {
+    let day = e.currentTarget.firstElementChild.id == 'previous' ? -1 : 1
+    this.currDate.setDate(this.currDate.getDate() + day)
+    this.setTitle()
+    console.log(this.currDate +'navigator');
+    
+    this.utilService.setCurrDate(this.currDate)
+  }
+
   setTitle() {
     let currMonth = this.currDate.toLocaleString('default', { month: 'long' });
     let currYear = this.currDate.getFullYear()
-    this.title = `${currMonth} ${currYear}`
-  /*   let lastSundayDate = this.getLastSunday()
-    if (this.currDate.getDate() != lastSundayDate.getDate()) {
+    if (this.currViewPath.url == '/day') {
+      this.title = `${currMonth},${this.currDate.getDate()} ${currYear}`
+    } else {
       this.title = `${currMonth} ${currYear}`
-      return
-    }
-
-    let nextMonthDate = new Date(currYear, this.currDate.getMonth() + 1, 1);
-    let nextMonth = nextMonthDate.toLocaleString('default', { month: 'long' })
-    this.title = `${currMonth}-${nextMonth} ${currYear}` */
+    } 
+    /*   let lastSundayDate = this.getLastSunday()
+      if (this.currDate.getDate() != lastSundayDate.getDate()) {
+        this.title = `${currMonth} ${currYear}`
+        return
+      }
+  
+      let nextMonthDate = new Date(currYear, this.currDate.getMonth() + 1, 1);
+      let nextMonth = nextMonthDate.toLocaleString('default', { month: 'long' })
+      this.title = `${currMonth}-${nextMonth} ${currYear}` */
   }
 
   navigate(e: any) {
+    console.log(this.currViewPath.url);
+    
     switch (this.currViewPath.url) {
       case '/month':
         this.navigateMonth(e)
         break;
       case '/day':
-        'fnDay'
+        this.navigationDay(e)
         break;
       case '/week':
         this.navigateWeek(e)
