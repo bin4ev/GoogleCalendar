@@ -1,11 +1,16 @@
 <div class="container">
-    <div class="dates-wrapper"> 
-        <div class="dates">
+    <div class="horiz-line"></div>
+    <div class="date-wrap">
+        <span class="date-format">GMT(+02)</span>
+        <div class="date">
             <div class="days">{{weekdays[currDay.getDay()]}}</div>
             <div class="date" [class.curr-date]="isToday(currDay.getDate())">
               {{currDay.getDate()}}
             </div>
-        </div> 
+        </div>
+    </div> 
+    <div class="dates-wrapper"> 
+      
         <div class="date-cell"
         *ngFor="let t of time let i = index ">
         <span class="time-items">{{t.time}}</span>
