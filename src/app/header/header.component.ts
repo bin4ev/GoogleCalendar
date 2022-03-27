@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { faAngleRight, faAngleLeft, faAngleDown, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { NavigationEnd, Router } from '@angular/router';
 import { UtilsService } from '../utils.service';
@@ -11,6 +11,8 @@ import { filter } from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  @ViewChild('todayBtn') todayBtn!: ElementRef
+
   @Output() next = new EventEmitter()
   @Output() openAside = new EventEmitter()
 
@@ -21,6 +23,10 @@ export class HeaderComponent {
 
   searchMode = false
   currDate: Date = new Date()
+  toolTip = new Date().toLocaleString('en',{weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric"})
   showCalendarWidget = true
   items: any = [
     { name: 'Day', shortcut: 'D', path: 'day' },
@@ -29,6 +35,10 @@ export class HeaderComponent {
   ]
 
   constructor(private utilService: UtilsService, private router: Router,) { }
+
+  ngAfterViewInit() {
+    this.todayBtn.nativeElement.setAttribute('curr-date', this.toolTip)
+  }
 
   toggleSearchMode() {
     this.searchMode = !this.searchMode
@@ -39,7 +49,7 @@ export class HeaderComponent {
     this.utilService.setCurrDate(this.currDate)
   }
 
-  openAsideMenu(){
+  openAsideMenu() {
     this.openAside.emit()
     this.showCalendarWidget = !this.showCalendarWidget
   }

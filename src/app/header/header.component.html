@@ -6,7 +6,8 @@
         </li>
     </ul>
     <ul class="nav-bar-middle">
-        <li class="btn" (click)="getToday()">Today</li>
+        <li #todayBtn class="btn"
+         (click)="getToday()">Today</li>
         <app-navigator [show]="showCalendarWidget"></app-navigator>
     </ul>
     <ul class="nav-bar-right">
@@ -17,23 +18,23 @@
             <app-view-calendars-menu [items]="items"></app-view-calendars-menu>
         </li>
     </ul>
-     
+
 </nav>
 
 <nav class="second-nav" *ngIf="searchMode">
     <ul class="nav-bar-left">
-        <li style="cursor: pointer;"  (click)="toggleSearchMode()">
+        <li style="cursor: pointer;" (click)="toggleSearchMode()">
             <fa-icon [icon]="iconLeft"></fa-icon>
         </li>
         <li>Search</li>
     </ul>
     <ul class="nav-bar-middle">
         <div class="search">
-            <div  class="main-menu"> 
+            <div class="main-menu">
                 <fa-icon class="icons" [icon]="iconSearch"></fa-icon>
             </div>
             <input type="text" placeholder="Search">
         </div>
     </ul>
-  
+
 </nav>

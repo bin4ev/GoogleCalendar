@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { UtilsService } from 'src/app/utils.service';
 
 @Component({
   selector: 'app-view-calendars-menu',
@@ -25,7 +26,7 @@ export class ViewCalendarsMenuComponent {
 
   showMenuButton = false
   currView = 'Month'
-
+  
   changeState(currState: string) {
     this.currView = currState
     this.toggleMenuBtn()

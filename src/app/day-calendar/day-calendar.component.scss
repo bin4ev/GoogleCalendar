@@ -53,7 +53,6 @@
     flex-direction: column;
     margin-top: 25px;
     overflow-x: scroll;
-    height: 80vh;
     position: relative;
 }
 .dates-wrapper > div:nth-child(1){
@@ -152,9 +151,6 @@
 .date{
      padding: 9px;
 }
-/* .events-wrap {
-    margin-left: 19px;
-} */
 .events {
     padding-left: 5px;
     border: solid 0.2px;
@@ -163,9 +159,10 @@
     font-size: 14px;
     position: absolute;
     width: 97%;
-    left: 4%;
+    left:4%;
     z-index: 1;
 }
+
 .events-name{
     word-wrap: break-word;
     display: block;
@@ -181,4 +178,10 @@
     z-index: 100;
     top: 100px;
     bottom: 45px;
+}
+
+.active{
+  z-index: 999 !important;
+  width : 97%  !important;
+  left:4%  !important;
 }

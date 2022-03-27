@@ -15,7 +15,7 @@ export class CalendarService {
         name: 'Busy',
         start: '7:20 AM',
         end: '11:50 AM',
-        date: '17/03',
+        date: '27/03',
         color: 'red'
       },
       {
@@ -23,7 +23,7 @@ export class CalendarService {
         name: 'Meet with Ivan',
         start: '8:20 AM',
         end: '12:20 AM',
-        date: '17/03',
+        date: '27/03',
         color: 'red'
       },
       {
@@ -31,7 +31,7 @@ export class CalendarService {
         name: 'Dinner',
         start: '3:20 AM',
         end: '6:00 AM',
-        date: '17/03',
+        date: '27/03',
         color: 'red'
       },
       {
@@ -39,7 +39,7 @@ export class CalendarService {
         name: 'Meeting Bussines',
         start: '3:10 AM',
         end: '5:30 AM',
-        date: '17/03',
+        date: '27/03',
         color: 'red'
       },
       {
@@ -47,7 +47,7 @@ export class CalendarService {
         name: 'Dentis ',
         start: '3:20 AM',
         end: '4:15 PM',
-        date: '17/03',
+        date: '27/03',
         color: 'red'
       }
     ],
@@ -57,7 +57,7 @@ export class CalendarService {
         name: 'Interview',
         start: '3:10 AM',
         end: '9:30 AM',
-        date: '17/03',
+        date: '27/03',
         color: 'blue'
       },
       {
@@ -65,7 +65,7 @@ export class CalendarService {
         name: 'Doctor',
         start: '8:00 AM',
         end: '8:50 AM',
-        date: '17/03',
+        date: '27/03',
         color: 'blue'
       },
     ],
@@ -75,15 +75,15 @@ export class CalendarService {
         name: 'Doctor ',
         start: '4:50 AM',
         end: '12:00 AM',
-        date: '17/03',
+        date: '27/03',
         color: 'green'
       },
       {
         id: '7',
         name: 'JavaScript Course',
-        start: '8:00 AM',
-        end: '8:50 AM',
-        date: '17/03',
+        start: '6:00 PM',
+        end: '8:50 PM',
+        date: '27/03',
         color: 'green'
       }
     ],
@@ -142,7 +142,7 @@ export class CalendarService {
     let [m, format] = min.split(' ')
     return {
       hour: h + format,
-      min: m,
+      min: Number(m),
       format
     }
   }

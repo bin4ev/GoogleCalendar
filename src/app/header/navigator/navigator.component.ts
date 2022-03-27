@@ -53,7 +53,7 @@ export class NavigatorComponent {
   searchMode = false
   currDate: Date = new Date()
   title!: string
-  currViewPath!: any
+  currViewPath: any = '/month'
   showWidget = false
   removeOnClick!: any
   state!: string
@@ -67,6 +67,7 @@ export class NavigatorComponent {
 
     this.utilService.getCurrDate$.subscribe(d => {    
       this.currDate = d
+    
       this.setTitle()
     })
   }
@@ -114,18 +115,19 @@ export class NavigatorComponent {
     let day = e.currentTarget.firstElementChild.id == 'previous' ? -1 : 1
     this.currDate.setDate(this.currDate.getDate() + day)
     this.setTitle()
-    console.log(this.currDate +'navigator');
-    
     this.utilService.setCurrDate(this.currDate)
   }
 
   setTitle() {
     let currMonth = this.currDate.toLocaleString('default', { month: 'long' });
     let currYear = this.currDate.getFullYear()
-    if (this.currViewPath.url == '/day') {
-      this.title = `${currMonth},${this.currDate.getDate()} ${currYear}`
-    } else {
+
+    if (this.currViewPath.url != '/day' && this.currViewPath?.url != '/week'  ) {
       this.title = `${currMonth} ${currYear}`
+     
+    } else {
+      this.title = `${currMonth},${this.currDate.getDate()} ${currYear}`
+    
     } 
     /*   let lastSundayDate = this.getLastSunday()
       if (this.currDate.getDate() != lastSundayDate.getDate()) {
@@ -139,8 +141,6 @@ export class NavigatorComponent {
   }
 
   navigate(e: any) {
-    console.log(this.currViewPath.url);
-    
     switch (this.currViewPath.url) {
       case '/month':
         this.navigateMonth(e)

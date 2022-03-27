@@ -12,6 +12,7 @@ import { ViewCalendarsMenuComponent } from './header/view-calendars-menu/view-ca
 import { DayCalendarComponent } from './day-calendar/day-calendar.component';
 import { WeekCalendarComponent } from './week-calendar/week-calendar.component';
 import { NavigatorComponent } from './header/navigator/navigator.component';
+import { ToolTipDirective } from './tool-tip.directive';
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
     ViewCalendarsMenuComponent,
     DayCalendarComponent,
     WeekCalendarComponent,
-    NavigatorComponent
+    NavigatorComponent,
+    ToolTipDirective
   ],
   imports: [
     BrowserModule,

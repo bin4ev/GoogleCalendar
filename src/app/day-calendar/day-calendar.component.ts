@@ -1,6 +1,11 @@
-import { Component, OnInit, ViewChildren, Output, EventEmitter, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, Output, EventEmitter, QueryList, HostListener, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { CalendarService } from '../calendar.service';
 import { UtilsService } from '../utils.service';
+
+
+const END_HEIGHT_DATE_WRAPPER = 2000
+const DATE_CELL_HEIGHT = 60
+const START_HEIGHT_DATE_WRAPPER = 10
 
 @Component({
   selector: 'app-day-calendar',
@@ -8,7 +13,7 @@ import { UtilsService } from '../utils.service';
   styleUrls: ['./day-calendar.component.scss']
 })
 export class DayCalendarComponent {
-  @ViewChildren('events') events!: QueryList<any>
+  @ViewChild('datesWrapper') datesWrapper!: ElementRef
 
   @Output() sentCurrDate = new EventEmitter
 
@@ -44,8 +49,15 @@ export class DayCalendarComponent {
   currDay = this.d
   showCalendarOf!: any
   allCalendars: any = []
+  offsetTop = 0
+  currDragEl!: any
+  mouseDown = false
+  subscrMouseMove!: any
+  subscrMouseUp!: any
 
-  constructor(private utilService: UtilsService, private calendarService: CalendarService) {
+  constructor(private utilService: UtilsService,
+    private calendarService: CalendarService,
+    private renderer: Renderer2) {
     this.utilService.getCurrDate$.subscribe(d => {
       this.setDateView(d)
     })
@@ -57,76 +69,215 @@ export class DayCalendarComponent {
 
   getAllCalendars() {
     this.allCalendars = this.calendarService.getEventsForToday(this.showCalendarOf, this.currDay)
+    if (this.allCalendars.length == 0) {
+      return
+    }
+
+    this.add24HoursFormat()
     this.parseDurationEvent()
     this.setEvents()
   }
 
   parseDurationEvent() {
     for (let event of this.allCalendars) {
-      let timeStart = event.startParse.format == 'PM' ? parseInt(event.startParse.hour) + 12 : parseInt(event.startParse.hour)
-      let timeEnd = event.endParse.format == 'PM' ? parseInt(event.endParse.hour) + 12 : parseInt(event.endParse.hour)
-      let minutes = (timeEnd - timeStart) * 60
-      minutes += event.endParse.min - event.startParse.min
+      let minutes = (event.format24End - event.format24Start) * DATE_CELL_HEIGHT
+      minutes -= event.startParse.min
+      minutes += event.endParse.min
       event.duration = minutes
-  }
-}
-
-setEvents() {
-  this.allCalendars.sort((a: any, b: any) => b.duration - a.duration)
-  for (let i = 1; i <= this.allCalendars.length; i++) {
-    this.allCalendars[i].zIndex = i + 1
-    this.allCalendars[i].left =  (i * 10) + '%'
-    this.allCalendars[i].width = 100 - (i * 10) + '%'
+    }
   }
 
-/*   for (let event of this.allCalendars) {
+  add24HoursFormat() {
+    for (let event of this.allCalendars) {
+      event.format24Start = event.startParse.format == 'PM' ? parseInt(event.startParse.hour) + 12 : parseInt(event.startParse.hour)
+      event.format24End = event.endParse.format == 'PM' ? parseInt(event.endParse.hour) + 12 : parseInt(event.endParse.hour)
+    }
+  }
+
+  onMouseDown(e: any) {
+    this.subscrMouseMove = this.renderer.listen(this.datesWrapper.nativeElement, 'mousemove', this.onMouseMove.bind(this))
+    this.subscrMouseUp = this.renderer.listen('document', 'mouseup', this.onMouseUp.bind(this))
+    this.currDragEl = e.target
+    this.currDragEl.classList.add('active')
+    this.currDragEl.style.boxShadow = `0px 1px 15px 4px ${this.currDragEl.style.background}`
+    this.offsetTop = this.currDragEl.offsetTop - e.clientY
+  }
+
+  onMouseMove(e: any) {
+    e.preventDefault()
+    let calcCord = e.clientY + this.offsetTop
+    calcCord = this.range(START_HEIGHT_DATE_WRAPPER, END_HEIGHT_DATE_WRAPPER, calcCord)
+    this.currDragEl.style.top = (calcCord) + 'px'
+    this.setParameterForEvent()
+  }
+
+  onMouseUp(e: any) {
+    if (e.button != 0) {
+      return
+    }
+
+    this.subscrMouseMove()
+    this.subscrMouseUp()
+    this.currDragEl.style.boxShadow = 'none'
+    this.setEvents()
+    this.currDragEl.classList.remove('active')
+    this.currDragEl = null
+
+  }
+
+  range(start: number, end: number, value: number) {
+    if (value < start) {
+      value = start
+    }
+    if (value > end) {
+      value = end
+    }
+    return value
+  }
+
+  setParameterForEvent() {
+    let e = this.allCalendars[this.currDragEl.id]
+
+    let hour = (parseInt((this.currDragEl.style.top) + 6) / DATE_CELL_HEIGHT) + 1
+    e.format24Start = Math.floor(hour)
+    let percentMin = hour - Math.floor(hour)
+    let res = this.swithTimeFormat(Math.floor(hour))
+    e.startParse.hour = res.digit
+    e.startParseFormat = res.format
+    let minutes: any = Math.trunc(Number(percentMin.toFixed(1)) * DATE_CELL_HEIGHT)
+    e.startParse.min = this.rounding(minutes)
+
+    //set end 
+    let timeToAdd = this.getHoursFromMinutes(e.duration)
+    e.format24End = e.format24Start + timeToAdd.hour
+    e.endParse.min = timeToAdd.min + Number(e.startParse.min)
+    if (e.endParse.min >= 60) {
+      e.endParse.min -= 60
+      e.format24End += 1
+    }
+
+    let { digit, format } = this.swithTimeFormat(e.format24End)
+    e.endParse.hour = digit
+    e.endParseFormat = format
+    this.formatPretty(e)
+  }
+
+  formatPretty(e: any) {
+    if (e.startParseFormat == e.endParseFormat) {
+      if (e.startParse.min == '00' && e.endParse.min == '00') {
+        e.start = e.startParse.hour
+        e.end = `${e.endParse.hour} ${e.endParseFormat}`
+      } else {
+        e.start = `${e.startParse.hour}:${e.startParse.min}`
+        e.end = `${e.endParse.hour}:${e.endParse.min} ${e.endParseFormat}`
+      }
+    } else {
+      if (e.startParse.min == '00' && e.endParse.min == '00') {
+        e.start = `${e.startParse.hour} ${e.startParseFormat}`
+        e.end = `${e.endParse.hour} ${e.endParseFormat}`
+      } else {
+        e.start = `${e.startParse.hour}:${e.startParse.min} ${e.startParseFormat}`
+        e.end = `${e.endParse.hour}:${e.endParse.min} ${e.endParseFormat}`
+      }
+    }
+  }
+
+  getHoursFromMinutes(minutes: number) {
+    let hour = Math.floor(minutes / 60)
+    let perCent = Number((minutes / 60).toFixed(2)) % 1
+    let min = Math.round(perCent * 60)
+    return { hour, min }
+  }
+
+  swithTimeFormat(digit: number): { digit: number, format: string } {
+    let format = 'AM'
+    if (digit > 12) {
+      digit -= 12
+      format = 'PM'
+    }
+
+    return { digit, format }
+  }
+
+  rounding(num: number): number | string {
+    let res: any = 0
+
+    if (num > 0) {
+      res = '00'
+    }
+    if (num > 15) {
+      res = 15
+    }
+    if (num > 30) {
+      res = 30
+    }
+    if (num > 45) {
+      res = 45
+    }
+    return res
+  }
+
+  setEvents() {
+    let groups = this.getGroups()
+    let prevLeft = 0
+    for (let group of groups) {
+      group.sort((a: any, b: any) => b.duration - a.duration)
+      for (let i = 0; i < group.length; i++) {
+        let event = group[i]
+        if (i == 0) {
+          event.top = ((DATE_CELL_HEIGHT * event.format24Start) + Number(event.startParse.min))
+          event.zIndex = i + 1
+          event.left = 4 + '%'
+          event.width = 97 + '%'
+          continue
+        }
+
+        event.top = (DATE_CELL_HEIGHT * event.format24Start) + Number(event.startParse.min)
+        event.zIndex = i + 1
+        event.left = (prevLeft + 12) + '%'
+        prevLeft = prevLeft + 12
+        event.width = (97 - prevLeft) + '%'
+      }
+    }
+  }
+
+  getGroups() {
+    let groups = []
+    let group: any = []
+    let durationGroup: any = {}
+    this.allCalendars.sort((a: any, b: any) => a.format24Start - b.format24Start)
+
     for (let i = 0; i < this.allCalendars.length; i++) {
-      let x = this.allCalendars[i]
-
-      if (parseInt(x.start) > parseInt(event.start) &&
-        parseInt(event.end) > parseInt(x.start)) {
-        x.width = 100 - (i + 1 * 20) + '%'
-        x.left = (i+1) * 2 + '%'
-        continue
-      }
-
-      if (parseInt(x.start) < parseInt(event.start) &&
-        parseInt(event.end) < parseInt(x.start)) {
-        x.width = 100 - (i + 2 * 20) + '%'
-        x.left = (i+1) * 4 + '%'
-        continue
-      }
-
-      if (parseInt(x.start) < parseInt(event.start) &&
-      parseInt(event.end) < parseInt(x.start)) {
-       x.width = 100 - (i + 3* 20) + '%' 
-      x.left = (i+1) * 6 + '%'
-      continue
-    }
-
-
-
-      if (parseInt(x.start) < parseInt(event.start) &&
-        parseInt(event.start) > parseInt(x.end)) {
-        x.width = 100 - (i + 4 * 20) + '%'
-        x.left = (i+1) * 7 + '%'
+      let event = this.allCalendars[i]
+      if (event.format24Start < durationGroup.end && i != 0) {
+        group.push(event)
+        if (event.format24End > durationGroup.end) {
+          durationGroup.end = event.format24End
+        }
+      } else {
+        group = []
+        groups.push(group)
+        durationGroup.start = event.format24Start
+        durationGroup.end = event.format24End
+        group.push(event)
       }
     }
-  } */
-}
 
-setDateView(d: Date) {
-  this.currMonth = d.getMonth()
-  this.currDay = d
-  this.getAllCalendars()
-}
+    return groups
+  }
 
-isToday(date: Number) {
-  let d = new Date
-  return date == d.getDate() &&
-    this.currMonth == this.d.getMonth() &&
-    this.currYear == this.d.getFullYear()
-}
+  setDateView(d: Date) {
+    this.currMonth = d.getMonth()
+    this.currDay = d
+    this.getAllCalendars()
+  }
+
+  isToday(date: Number) {
+    let d = new Date
+    return date == d.getDate() &&
+      this.currMonth == this.d.getMonth() &&
+      this.currYear == this.d.getFullYear()
+  }
 
 
 }

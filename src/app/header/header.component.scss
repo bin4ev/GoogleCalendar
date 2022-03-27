@@ -13,14 +13,34 @@ nav{
           }
     }
 }
+.nav-bar-middle{
+    position: relative;
+    display: flex;
+    align-items: center;
+    li:after {
+        content: attr(curr-date);
+        display: none;
+        position: absolute;
+        border: #616261;
+        color: white;
+        background-color: #616261;
+        font-size: 13px;
+        padding: 6px;
+        top: 41px;
+        left: -41px;
+        z-index: 9999;
+        transition: top 2s, width 2s;
+    }
+}
+ .nav-bar-middle:hover {
+    li:after {
+        display: block;
+    }
+} 
 .navigate-wraper {
     display: flex;
 }
 .nav-bar-left, .nav-bar-right {
-    display: flex;
-    align-items: center;
-}
-.nav-bar-middle {
     display: flex;
     align-items: center;
 }
