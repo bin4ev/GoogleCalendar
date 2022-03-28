@@ -1,4 +1,7 @@
 
+* {
+    box-sizing: border-box;
+}
 nav{
     display: flex;
     align-items: center;
@@ -9,7 +12,9 @@ nav{
         padding: 0;
         list-style: none;
         li {
+            position: relative;
             margin-right: 20px;
+            margin-left: 20px;
           }
     }
 }
@@ -17,33 +22,18 @@ nav{
     position: relative;
     display: flex;
     align-items: center;
-    li:after {
-        content: attr(curr-date);
-        display: none;
-        position: absolute;
-        border: #616261;
-        color: white;
-        background-color: #616261;
-        font-size: 13px;
-        padding: 6px;
-        top: 41px;
-        left: -41px;
-        z-index: 9999;
-        transition: top 2s, width 2s;
-    }
 }
- .nav-bar-middle:hover {
-    li:after {
-        display: block;
-    }
-} 
+
+
 .navigate-wraper {
     display: flex;
 }
+
 .nav-bar-left, .nav-bar-right {
     display: flex;
     align-items: center;
 }
+
 .main-menu {
     width: 36px;
     height: 38px;
@@ -51,17 +41,21 @@ nav{
     text-align: center;
     border-radius: 30px;
 }
+
 .main-menu:hover, .btn:hover {
     background-color: #DCDCDC;
 }
+
 img {
     max-width: 100%;
     height: auto;
     object-fit: contain;
 }
+
 .logo {
     width: 126px;
 }
+
 .btn {
     border: solid 1px #d1cdcd;
     font-size: 19px;
@@ -69,21 +63,26 @@ img {
     border-radius: 6px;
     cursor: pointer;
 }
+
 .btn:active {
     background-color: #b6b0b0;
 }
+
 .navigate-wraper{
     display: flex;
     width: 50px;
     justify-content: space-between;
 }
+
 .btns {
     cursor: pointer;
 }
+
 .icons {
     font-size: 18px;
     color: #616261;
 }
+
 .search {
     display: flex;
     align-items: center;
@@ -92,11 +91,23 @@ img {
     border-radius: 18px;
     width: 600px;
 }
+
 input {
     margin-left: 20px;
     outline: none;
     border: none;
     font-size: 15px;
+}
+.icon-data-logo {
+    position: absolute;
+    background: #ffffff;
+    width: 21px;
+    height: 21px;
+    top: 24px;
+    left: 9px;
+    font-size: 17px;
+    color: #4285F4;
+    font-weight: bold;
 }
 
   

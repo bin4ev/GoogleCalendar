@@ -62,7 +62,7 @@ export class CalendarService {
       },
       {
         id: '9',
-        name: 'Doctor',
+        name: 'Angular intern',
         start: '8:00 AM',
         end: '8:50 AM',
         date: '27/03',

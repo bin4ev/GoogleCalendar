@@ -15,6 +15,7 @@
         </div>
         <div id="{{i}}" class="events" *ngFor="let e of allCalendars let i = index"
            (mousedown)="onMouseDown($event)"
+           (click)="sendEventInfo(i)"
            [ngStyle]="{
                     'background': e.color,
                     'height': e.duration + 'px',
@@ -26,5 +27,11 @@
             <span class="events-name">{{e.name}}</span>
             <span> {{e.start}}-{{e.end}}</span>      
         </div>
-    </div>    
+     
+    </div> 
+    <div *ngIf="eventInfo">
+        <app-even-infot-dialog [data] ="eventInfo"
+        (closeDialog)="clearEventInfo()"></app-even-infot-dialog>
+    </div>   
 </div>
+

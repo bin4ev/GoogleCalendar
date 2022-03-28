@@ -14,16 +14,16 @@
       </div>
       <div #child2 class="dropdown-child">
         <div class="holidays-wraper">
-          <input style="background:green;" #input type="checkbox" value="Dragan" (click)="onClick($event)">
-          <span>Dragan Calendar</span>
+          <input style="background:green;" #input type="checkbox" value="Dragan" (click)="onClick($event)" >
+          <span  [appToolTip]="'Dragan Calendar'">Dragan Calendar</span>
         </div>
-        <div class="holidays-wraper">
+        <div class="holidays-wraper" >
           <input style="background:  red;" #input type="checkbox" value="Ivan" (click)="onClick($event)">
-          <span>Ivan Calendar</span>
+          <span [appToolTip]="'Ivan Calendar'">Ivan Calendar</span>
        </div>
-       <div class="holidays-wraper">
+       <div class="holidays-wraper" >
         <input style="background:  blue;" #input type="checkbox" value="Stamat" (click)="onClick($event)">
-        <span>Stamat Calendar</span>
+        <span  [appToolTip]="'Stamat Calendar'">Stamat Calendar</span>
      </div>
       </div>
     </div>

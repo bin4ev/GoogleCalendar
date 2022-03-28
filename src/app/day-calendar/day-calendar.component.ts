@@ -54,6 +54,8 @@ export class DayCalendarComponent {
   mouseDown = false
   subscrMouseMove!: any
   subscrMouseUp!: any
+  eventInfo!: any
+  mousemoving = false
 
   constructor(private utilService: UtilsService,
     private calendarService: CalendarService,
@@ -75,7 +77,15 @@ export class DayCalendarComponent {
 
     this.add24HoursFormat()
     this.parseDurationEvent()
+    this.addDayOfWeek()
     this.setEvents()
+  }
+
+  addDayOfWeek() {
+    for (let event of this.allCalendars) {
+     event.dayOfWeek = this.currDay.toLocaleString('en-us', { weekday: 'long' })
+     event.month = this.currDay.toLocaleString('default', { month: 'long' })
+    }
   }
 
   parseDurationEvent() {
@@ -95,16 +105,22 @@ export class DayCalendarComponent {
   }
 
   onMouseDown(e: any) {
+    this.mousemoving = false
     this.subscrMouseMove = this.renderer.listen(this.datesWrapper.nativeElement, 'mousemove', this.onMouseMove.bind(this))
     this.subscrMouseUp = this.renderer.listen('document', 'mouseup', this.onMouseUp.bind(this))
-    this.currDragEl = e.target
-    this.currDragEl.classList.add('active')
-    this.currDragEl.style.boxShadow = `0px 1px 15px 4px ${this.currDragEl.style.background}`
+    this.currDragEl = e.target;
+    
+ 
     this.offsetTop = this.currDragEl.offsetTop - e.clientY
   }
 
   onMouseMove(e: any) {
     e.preventDefault()
+    if(!this.mousemoving) {
+      this.currDragEl.classList.add('draging')
+      this.currDragEl.style.boxShadow = `0px 1px 15px 4px ${this.currDragEl.style.background}`
+    }
+    this.mousemoving = true
     let calcCord = e.clientY + this.offsetTop
     calcCord = this.range(START_HEIGHT_DATE_WRAPPER, END_HEIGHT_DATE_WRAPPER, calcCord)
     this.currDragEl.style.top = (calcCord) + 'px'
@@ -115,14 +131,11 @@ export class DayCalendarComponent {
     if (e.button != 0) {
       return
     }
-
     this.subscrMouseMove()
     this.subscrMouseUp()
     this.currDragEl.style.boxShadow = 'none'
     this.setEvents()
-    this.currDragEl.classList.remove('active')
-    this.currDragEl = null
-
+    this.currDragEl.classList.remove('draging')
   }
 
   range(start: number, end: number, value: number) {
@@ -136,8 +149,7 @@ export class DayCalendarComponent {
   }
 
   setParameterForEvent() {
-    let e = this.allCalendars[this.currDragEl.id]
-
+    let e = this.allCalendars[this.currDragEl.id]    
     let hour = (parseInt((this.currDragEl.style.top) + 6) / DATE_CELL_HEIGHT) + 1
     e.format24Start = Math.floor(hour)
     let percentMin = hour - Math.floor(hour)
@@ -279,5 +291,22 @@ export class DayCalendarComponent {
       this.currYear == this.d.getFullYear()
   }
 
+  sendEventInfo(index:any) {
+    setTimeout(() => {
+      if(this.mousemoving){
+        return
+      }
+
+      this.eventInfo = this.allCalendars[index]
+      console.log(this.eventInfo );
+      
+      this.currDragEl.style.boxShadow = `0px 1px 15px 4px ${this.currDragEl.style.background}`
+    }, 100);
+  }
+
+  clearEventInfo() {
+    this.eventInfo = null
+    this.currDragEl.style.boxShadow = 'none'
+  }
 
 }

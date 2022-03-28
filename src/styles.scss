@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
 * {
     box-sizing:border-box;
-    font-family: helvetica;
+    font-family: "Google Sans",Roboto,Arial,sans-serif;
 }
 
 .main {
@@ -25,6 +25,7 @@
     margin-top: 20px;
     display: flex;
     align-items: center;
+    padding: 4px;
 }
 .big-btn {
     border-bottom: solid 3px #c9c4c4;
@@ -100,6 +101,29 @@ input[type='checkbox']{
     border-radius: 3px;
     background: white;
     position: relative;
+}
+
+.toolTip {
+    position: relative;
+    display: none;
+    justify-content: center;
+    top: 4px;
+}
+//tooltip
+ .toolTip:after {
+    content: attr(curr-date);
+    width: max-content;
+    position: absolute;
+    border: #616261;
+    display: flex;
+    color: white;
+    background-color: #616261;
+    font-size: 13px;
+    padding: 6px;
+    /* top: 8px; */
+    /* left: -28px; */
+    z-index: 9999;
+    transition: top 2s, width 2s;
 }
 
 

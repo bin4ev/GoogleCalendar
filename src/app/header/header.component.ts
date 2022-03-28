@@ -36,9 +36,9 @@ export class HeaderComponent {
 
   constructor(private utilService: UtilsService, private router: Router,) { }
 
-  ngAfterViewInit() {
+/*   ngAfterViewInit() {
     this.todayBtn.nativeElement.setAttribute('curr-date', this.toolTip)
-  }
+  } */
 
   toggleSearchMode() {
     this.searchMode = !this.searchMode

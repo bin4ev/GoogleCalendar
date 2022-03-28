@@ -1,17 +1,18 @@
 <nav *ngIf="!searchMode">
     <ul class="nav-bar-left">
-        <li class="main-menu" (click)="openAsideMenu()">☰</li>
+        <li class="main-menu" (click)="openAsideMenu()" [appToolTip]="'Main menu'" >☰</li>
         <li class="logo">
+            <div class="icon-data-logo">{{currDate.getDate()}}</div>
             <img src="https://frejun.com/wp-content/uploads/2021/10/google-calendar-2.png" alt="">
         </li>
     </ul>
     <ul class="nav-bar-middle">
         <li #todayBtn class="btn"
-         (click)="getToday()">Today</li>
+         (click)="getToday()" [appToolTip]="toolTip">Today</li>
         <app-navigator [show]="showCalendarWidget"></app-navigator>
     </ul>
     <ul class="nav-bar-right">
-        <li class="main-menu" (click)="toggleSearchMode()">
+        <li class="main-menu" (click)="toggleSearchMode()" [appToolTip]="'search'">
             <fa-icon class="icons" [icon]="iconSearch"></fa-icon>
         </li>
         <li>

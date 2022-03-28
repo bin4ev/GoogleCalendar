@@ -13,13 +13,17 @@ import { DayCalendarComponent } from './day-calendar/day-calendar.component';
 import { WeekCalendarComponent } from './week-calendar/week-calendar.component';
 import { NavigatorComponent } from './header/navigator/navigator.component';
 import { ToolTipDirective } from './tool-tip.directive';
+import { EvenInfotDialogComponent } from './even-infot-dialog/even-infot-dialog.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'month', pathMatch: 'full' },
   { path: 'month', component: MonthCalendarComponent },
-  { path: 'day', component: DayCalendarComponent },
-  { path: 'week', component: WeekCalendarComponent }
+  { path: 'day', component: DayCalendarComponent},
+  { path: 'day/event', component: EvenInfotDialogComponent },
+  { path: 'week', component: WeekCalendarComponent },
+  /*   {path: 'event', component: EvenInfotDialogComponent}, */
+  { path: '**', component: MonthCalendarComponent }
 ]
 
 @NgModule({
@@ -32,7 +36,8 @@ const routes: Routes = [
     DayCalendarComponent,
     WeekCalendarComponent,
     NavigatorComponent,
-    ToolTipDirective
+    ToolTipDirective,
+    EvenInfotDialogComponent
   ],
   imports: [
     BrowserModule,

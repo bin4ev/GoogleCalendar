@@ -71,16 +71,19 @@
   background-color: darkgrey;
   border-radius: 10px;
 } 
+
 .date-wrap {
     border-bottom: 1px solid #CED0D4;
     display: flex;
     align-items: flex-end;
     gap: 9px;
 } 
+
 .date-format {
     font-size: 12px;
     margin-bottom: 9px;
 }
+
 .date {
     font-size: 38px;
     display: flex;
@@ -89,6 +92,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 .title {
     font-size: 24px;
     font-weight: 500;
@@ -116,6 +120,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .wrap-time {
     display: flex;
     align-items: flex-start;
@@ -125,6 +130,7 @@
     border-top: solid 1px #e1dcdc;
     min-height: 60px;
 }
+
 .time {
     display: flex;
     font-size: 11px;
@@ -133,6 +139,7 @@
     position: relative;
     right: 16px;
 }
+
 .time-items   {
     bottom: 8px;
     position: relative;
@@ -148,9 +155,11 @@
     height: 1.5px;
     left: 40px;
 }
+
 .date{
      padding: 9px;
 }
+
 .events {
     padding-left: 5px;
     border: solid 0.2px;
@@ -170,6 +179,7 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
 .horiz-line {
     background: #e1dcdc;
     width: 1px;
@@ -180,7 +190,7 @@
     bottom: 45px;
 }
 
-.active{
+.draging{
   z-index: 999 !important;
   width : 97%  !important;
   left:4%  !important;
