@@ -51,6 +51,7 @@ export class DayCalendarComponent {
   allCalendars: any = []
   offsetTop = 0
   currDragEl!: any
+  prevZindexDragEl!: number
   mouseDown = false
   subscrMouseMove!: any
   subscrMouseUp!: any
@@ -285,7 +286,7 @@ export class DayCalendarComponent {
   }
 
   isToday(date: Number) {
-    let d = new Date
+    let d = new Date()
     return date == d.getDate() &&
       this.currMonth == this.d.getMonth() &&
       this.currYear == this.d.getFullYear()
@@ -293,20 +294,19 @@ export class DayCalendarComponent {
 
   sendEventInfo(index:any) {
     setTimeout(() => {
-      if(this.mousemoving){
-        return
+      if (!this.mousemoving) {
+        this.eventInfo = this.allCalendars[index]
+        this.currDragEl.style.boxShadow = `0px 1px 15px 4px ${this.currDragEl.style.background}`
+        this.prevZindexDragEl = this.currDragEl.style.zIndex
+        this.currDragEl.style.zIndex = 999
       }
-
-      this.eventInfo = this.allCalendars[index]
-      console.log(this.eventInfo );
-      
-      this.currDragEl.style.boxShadow = `0px 1px 15px 4px ${this.currDragEl.style.background}`
     }, 100);
   }
 
   clearEventInfo() {
     this.eventInfo = null
     this.currDragEl.style.boxShadow = 'none'
+    this.currDragEl.style.zIndex = this.prevZindexDragEl
   }
 
 }

@@ -16,7 +16,30 @@ export class CalendarService {
         start: '7:20 AM',
         end: '11:50 AM',
         date: '27/03',
-        color: 'red'
+        color: 'red',
+        createdBy: 'Stamat Ivanow',
+        guests : [
+          {
+            name: 'Stamat Ivanov',
+            email:' stamat@gmail.com',
+            going: true
+          },
+          {
+            name: 'Dimitar Dimitrov',
+            email:' dimitar@gmail.com',
+            going: false
+          },
+          {
+            name: 'Gosho Goshev',
+            email:' gosho@gmail.com',
+            going: undefined
+          },
+          {
+            name: 'Gero Gerov',
+            email:' gero@gmail.com',
+            going: undefined
+          },
+        ]
       },
       {
         id: '0',
@@ -24,7 +47,25 @@ export class CalendarService {
         start: '8:20 AM',
         end: '12:20 AM',
         date: '27/03',
-        color: 'red'
+        color: 'red',
+        createdBy: 'Ivaylo Ivaylov',
+        guests : [
+          {
+            name: 'Stamat Ivanov',
+            email:' stamat@gmail.com',
+            going: true
+          },
+          {
+            name: 'Dimitar Dimitrov',
+            email:' dimitar@gmail.com',
+            going: false
+          },
+          {
+            name: 'Gosho Goshev',
+            email:' gosho@gmail.com',
+            going: undefined
+          },
+        ]
       },
       {
         id: '2',
@@ -32,7 +73,25 @@ export class CalendarService {
         start: '3:20 AM',
         end: '6:00 AM',
         date: '27/03',
-        color: 'red'
+        color: 'red',
+        createdBy: 'Ivaylo Ivaylov',
+        guests : [
+          {
+            name: 'Stamat Ivanov',
+            email:' stamat@gmail.com',
+            going: true
+          },
+          {
+            name: 'Dimitar Dimitrov',
+            email:' dimitar@gmail.com',
+            going: false
+          },
+          {
+            name: 'Gosho Goshev',
+            email:' gosho@gmail.com',
+            going: undefined
+          },
+        ]
       },
       {
         id: '3',
@@ -40,7 +99,25 @@ export class CalendarService {
         start: '3:10 AM',
         end: '5:30 AM',
         date: '27/03',
-        color: 'red'
+        color: 'red',
+        createdBy: 'Ivaylo Ivaylov',
+        guests : [
+          {
+            name: 'Stamat Ivanov',
+            email:' stamat@gmail.com',
+            going: true
+          },
+          {
+            name: 'Dimitar Dimitrov',
+            email:' dimitar@gmail.com',
+            going: false
+          },
+          {
+            name: 'Gosho Goshev',
+            email:' gosho@gmail.com',
+            going: undefined
+          },
+        ]
       },
       {
         id: '4',
@@ -48,7 +125,25 @@ export class CalendarService {
         start: '3:20 AM',
         end: '4:15 PM',
         date: '27/03',
-        color: 'red'
+        color: 'red',
+        createdBy: 'Ivaylo Ivaylov',
+        guests : [
+          {
+            name: 'Stamat Ivanov',
+            email:' stamat@gmail.com',
+            going: true
+          },
+          {
+            name: 'Dimitar Dimitrov',
+            email:' dimitar@gmail.com',
+            going: false
+          },
+          {
+            name: 'Gosho Goshev',
+            email:' gosho@gmail.com',
+            going: undefined
+          },
+        ]
       }
     ],
     Stamat: [
@@ -58,7 +153,25 @@ export class CalendarService {
         start: '3:10 AM',
         end: '9:30 AM',
         date: '27/03',
-        color: 'blue'
+        color: 'blue',
+        createdBy: 'Ivaylo Ivaylov',
+        guests : [
+          {
+            name: 'Stamat Ivanov',
+            email:' stamat@gmail.com',
+            going: true
+          },
+          {
+            name: 'Dimitar Dimitrov',
+            email:' dimitar@gmail.com',
+            going: false
+          },
+          {
+            name: 'Gosho Goshev',
+            email:' gosho@gmail.com',
+            going: undefined
+          },
+        ]
       },
       {
         id: '9',
@@ -66,7 +179,25 @@ export class CalendarService {
         start: '8:00 AM',
         end: '8:50 AM',
         date: '27/03',
-        color: 'blue'
+        color: 'blue',
+        createdBy: 'Ivaylo Ivaylov',
+        guests : [
+          {
+            name: 'Stamat Ivanov',
+            email:' stamat@gmail.com',
+            going: true
+          },
+          {
+            name: 'Dimitar Dimitrov',
+            email:' dimitar@gmail.com',
+            going: false
+          },
+          {
+            name: 'Gosho Goshev',
+            email:' gosho@gmail.com',
+            going: undefined
+          },
+        ]
       },
     ],
     Dragan: [
@@ -76,7 +207,25 @@ export class CalendarService {
         start: '4:50 AM',
         end: '12:00 AM',
         date: '27/03',
-        color: 'green'
+        color: 'green',
+        createdBy: 'Ivaylo Ivaylov',
+        guests : [
+          {
+            name: 'Stamat Ivanov',
+            email:' stamat@gmail.com',
+            going: true
+          },
+          {
+            name: 'Dimitar Dimitrov',
+            email:' dimitar@gmail.com',
+            going: false
+          },
+          {
+            name: 'Gosho Goshev',
+            email:' gosho@gmail.com',
+            going: undefined
+          },
+        ]
       },
       {
         id: '7',
@@ -84,7 +233,25 @@ export class CalendarService {
         start: '6:00 PM',
         end: '8:50 PM',
         date: '27/03',
-        color: 'green'
+        color: 'green',
+        createdBy: 'Ivaylo Ivaylov',
+        guests : [
+          {
+            name: 'Stamat Ivanov',
+            email:' stamat@gmail.com',
+            going: true
+          },
+          {
+            name: 'Dimitar Dimitrov',
+            email:' dimitar@gmail.com',
+            going: false
+          },
+          {
+            name: 'Gosho Goshev',
+            email:' gosho@gmail.com',
+            going: undefined
+          },
+        ]
       }
     ],
      holidays:[]
@@ -145,5 +312,9 @@ export class CalendarService {
       min: Number(m),
       format
     }
+  }
+
+  getUserInfo() {
+
   }
 }
