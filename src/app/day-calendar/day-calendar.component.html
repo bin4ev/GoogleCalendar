@@ -13,9 +13,11 @@
         <div class="date-cell" *ngFor="let t of time let i = index ">
             <span class="time-items" >{{t.time}}</span>      
         </div>
-        <div id="{{i}}" class="events" *ngFor="let e of allCalendars let i = index"
+        <div id="{{i}}"  class="events"  
+         *ngFor="let e of allCalendars let i = index"
            (mousedown)="onMouseDown($event)"
            (click)="sendEventInfo(i)"
+           [ngClass]="{'smallEvent' : e.duration < 45}"
            [ngStyle]="{
                     'background': e.color,
                     'height': e.duration + 'px',
@@ -25,7 +27,7 @@
                     'left': e.left
                    }">
             <span class="events-name">{{e.name}}</span>
-            <span> {{e.start}}-{{e.end}}</span>      
+            <span>{{e.start}}-{{e.end}}</span>      
         </div>
      
     </div> 

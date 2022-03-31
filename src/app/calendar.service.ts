@@ -13,30 +13,30 @@ export class CalendarService {
       {
         id: '1',
         name: 'Busy',
-        start: '7:20 AM',
-        end: '11:50 AM',
+        start: '7:00 AM',
+        end: '7:30 AM',
         date: '27/03',
         color: 'red',
         createdBy: 'Stamat Ivanow',
-        guests : [
+        guests: [
           {
             name: 'Stamat Ivanov',
-            email:' stamat@gmail.com',
+            email: ' stamat@gmail.com',
             going: true
           },
           {
             name: 'Dimitar Dimitrov',
-            email:' dimitar@gmail.com',
+            email: ' dimitar@gmail.com',
             going: false
           },
           {
             name: 'Gosho Goshev',
-            email:' gosho@gmail.com',
+            email: ' gosho@gmail.com',
             going: undefined
           },
           {
             name: 'Gero Gerov',
-            email:' gero@gmail.com',
+            email: ' gero@gmail.com',
             going: undefined
           },
         ]
@@ -49,21 +49,21 @@ export class CalendarService {
         date: '27/03',
         color: 'red',
         createdBy: 'Ivaylo Ivaylov',
-        guests : [
+        guests: [
           {
             name: 'Stamat Ivanov',
-            email:' stamat@gmail.com',
+            email: ' stamat@gmail.com',
             going: true
           },
           {
             name: 'Dimitar Dimitrov',
-            email:' dimitar@gmail.com',
-            going: false
+            email: ' dimitar@gmail.com',
+            going: true
           },
           {
             name: 'Gosho Goshev',
-            email:' gosho@gmail.com',
-            going: undefined
+            email: ' gosho@gmail.com',
+            going: true
           },
         ]
       },
@@ -75,21 +75,21 @@ export class CalendarService {
         date: '27/03',
         color: 'red',
         createdBy: 'Ivaylo Ivaylov',
-        guests : [
+        guests: [
           {
             name: 'Stamat Ivanov',
-            email:' stamat@gmail.com',
-            going: true
+            email: ' stamat@gmail.com',
+            going: false
           },
           {
             name: 'Dimitar Dimitrov',
-            email:' dimitar@gmail.com',
+            email: ' dimitar@gmail.com',
             going: false
           },
           {
             name: 'Gosho Goshev',
-            email:' gosho@gmail.com',
-            going: undefined
+            email: ' gosho@gmail.com',
+            going: false
           },
         ]
       },
@@ -101,20 +101,20 @@ export class CalendarService {
         date: '27/03',
         color: 'red',
         createdBy: 'Ivaylo Ivaylov',
-        guests : [
+        guests: [
           {
             name: 'Stamat Ivanov',
-            email:' stamat@gmail.com',
+            email: ' stamat@gmail.com',
             going: true
           },
           {
             name: 'Dimitar Dimitrov',
-            email:' dimitar@gmail.com',
-            going: false
+            email: ' dimitar@gmail.com',
+            going: undefined
           },
           {
             name: 'Gosho Goshev',
-            email:' gosho@gmail.com',
+            email: ' gosho@gmail.com',
             going: undefined
           },
         ]
@@ -127,20 +127,20 @@ export class CalendarService {
         date: '27/03',
         color: 'red',
         createdBy: 'Ivaylo Ivaylov',
-        guests : [
+        guests: [
           {
             name: 'Stamat Ivanov',
-            email:' stamat@gmail.com',
-            going: true
+            email: ' stamat@gmail.com',
+            going: false
           },
           {
             name: 'Dimitar Dimitrov',
-            email:' dimitar@gmail.com',
+            email: ' dimitar@gmail.com',
             going: false
           },
           {
             name: 'Gosho Goshev',
-            email:' gosho@gmail.com',
+            email: ' gosho@gmail.com',
             going: undefined
           },
         ]
@@ -155,20 +155,20 @@ export class CalendarService {
         date: '27/03',
         color: 'blue',
         createdBy: 'Ivaylo Ivaylov',
-        guests : [
+        guests: [
           {
             name: 'Stamat Ivanov',
-            email:' stamat@gmail.com',
-            going: true
+            email: 'stamat@gmail.com',
+            going: undefined
           },
           {
             name: 'Dimitar Dimitrov',
-            email:' dimitar@gmail.com',
-            going: false
+            email: 'dimitar@gmail.com',
+            going: undefined
           },
           {
             name: 'Gosho Goshev',
-            email:' gosho@gmail.com',
+            email: 'gosho@gmail.com',
             going: undefined
           },
         ]
@@ -181,21 +181,21 @@ export class CalendarService {
         date: '27/03',
         color: 'blue',
         createdBy: 'Ivaylo Ivaylov',
-        guests : [
+        guests: [
           {
             name: 'Stamat Ivanov',
-            email:' stamat@gmail.com',
+            email: 'stamat@gmail.com',
             going: true
           },
           {
             name: 'Dimitar Dimitrov',
-            email:' dimitar@gmail.com',
-            going: false
+            email: 'dimitar@gmail.com',
+            going: true
           },
           {
             name: 'Gosho Goshev',
-            email:' gosho@gmail.com',
-            going: undefined
+            email: 'gosho@gmail.com',
+            going: true
           },
         ]
       },
@@ -209,20 +209,20 @@ export class CalendarService {
         date: '27/03',
         color: 'green',
         createdBy: 'Ivaylo Ivaylov',
-        guests : [
+        guests: [
           {
             name: 'Stamat Ivanov',
-            email:' stamat@gmail.com',
+            email: 'stamat@gmail.com',
             going: true
           },
           {
             name: 'Dimitar Dimitrov',
-            email:' dimitar@gmail.com',
-            going: false
+            email: 'dimitar@gmail.com',
+            going: true
           },
           {
             name: 'Gosho Goshev',
-            email:' gosho@gmail.com',
+            email: 'gosho@gmail.com',
             going: undefined
           },
         ]
@@ -235,27 +235,29 @@ export class CalendarService {
         date: '27/03',
         color: 'green',
         createdBy: 'Ivaylo Ivaylov',
-        guests : [
+        guests: [
           {
             name: 'Stamat Ivanov',
-            email:' stamat@gmail.com',
+            email: 'stamat@gmail.com',
             going: true
           },
           {
             name: 'Dimitar Dimitrov',
-            email:' dimitar@gmail.com',
+            email: 'dimitar@gmail.com',
             going: false
           },
           {
             name: 'Gosho Goshev',
-            email:' gosho@gmail.com',
+            email: 'gosho@gmail.com',
             going: undefined
           },
         ]
       }
     ],
-     holidays:[]
+    holidays: []
   }
+
+
 
   constructor() {
     fetch('https://date.nager.at/api/v2/PublicHolidays/2022/BG')
@@ -264,7 +266,7 @@ export class CalendarService {
       .catch((err) => console.error(err))
   }
 
-  getEvents(names: any, month: any, start: any, end: any) {    
+  getEvents(names: any, month: any, start: any, end: any) {
     let filtered = []
     for (let [key, value] of <Array<any>>Object.entries(this.allEvents)) {
       month = String(month).padStart(2, '0')
@@ -284,14 +286,14 @@ export class CalendarService {
     return filtered
   }
 
-  getEventsForToday(names:any,date: Date){
+  getEventsForToday(names: any, date: Date) {
     let filtered = []
     for (let [key, value] of <Array<any>>Object.entries(this.allEvents)) {
-     let day = String(date.getDate()).padStart(2, '0')
+      let day = String(date.getDate()).padStart(2, '0')
       if (names?.has(key)) {
         for (let el of value) {
           let [d, m] = el.date.split('/')
-          if (m == date.getMonth() +1 && day == d) {
+          if (m == date.getMonth() + 1 && day == d) {
             let obj = { ...el }
             obj.startParse = this.parseTime(el.start)
             obj.endParse = this.parseTime(el.end)
@@ -308,13 +310,9 @@ export class CalendarService {
     let [h, min] = time.split(':')
     let [m, format] = min.split(' ')
     return {
-      hour: h + format,
+      hour: Number(h),
       min: Number(m),
       format
     }
-  }
-
-  getUserInfo() {
-
   }
 }

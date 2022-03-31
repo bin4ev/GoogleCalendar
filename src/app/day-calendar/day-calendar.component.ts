@@ -58,6 +58,7 @@ export class DayCalendarComponent {
   eventInfo!: any
   mousemoving = false
 
+
   constructor(private utilService: UtilsService,
     private calendarService: CalendarService,
     private renderer: Renderer2) {
@@ -80,12 +81,15 @@ export class DayCalendarComponent {
     this.parseDurationEvent()
     this.addDayOfWeek()
     this.setEvents()
+    for(let e of this.allCalendars){
+      this.formatPretty(e)
+    }
   }
 
   addDayOfWeek() {
     for (let event of this.allCalendars) {
-     event.dayOfWeek = this.currDay.toLocaleString('en-us', { weekday: 'long' })
-     event.month = this.currDay.toLocaleString('default', { month: 'long' })
+      event.dayOfWeek = this.currDay.toLocaleString('en-us', { weekday: 'long' })
+      event.month = this.currDay.toLocaleString('default', { month: 'long' })
     }
   }
 
@@ -100,8 +104,8 @@ export class DayCalendarComponent {
 
   add24HoursFormat() {
     for (let event of this.allCalendars) {
-      event.format24Start = event.startParse.format == 'PM' ? parseInt(event.startParse.hour) + 12 : parseInt(event.startParse.hour)
-      event.format24End = event.endParse.format == 'PM' ? parseInt(event.endParse.hour) + 12 : parseInt(event.endParse.hour)
+      event.format24Start = event.startParse.format == 'PM' ? event.startParse.hour + 12 : event.startParse.hour
+      event.format24End = event.endParse.format == 'PM' ? event.endParse.hour + 12 : event.endParse.hour
     }
   }
 
@@ -110,16 +114,16 @@ export class DayCalendarComponent {
     this.subscrMouseMove = this.renderer.listen(this.datesWrapper.nativeElement, 'mousemove', this.onMouseMove.bind(this))
     this.subscrMouseUp = this.renderer.listen('document', 'mouseup', this.onMouseUp.bind(this))
     this.currDragEl = e.target;
-    
- 
+
+
     this.offsetTop = this.currDragEl.offsetTop - e.clientY
   }
 
   onMouseMove(e: any) {
     e.preventDefault()
-    if(!this.mousemoving) {
+    if (!this.mousemoving) {
       this.currDragEl.classList.add('draging')
-      this.currDragEl.style.boxShadow = `0px 1px 15px 4px ${this.currDragEl.style.background}`
+      this.currDragEl.style.boxShadow = `0px 2px 11px 0px ${this.currDragEl.style.background}`
     }
     this.mousemoving = true
     let calcCord = e.clientY + this.offsetTop
@@ -150,13 +154,15 @@ export class DayCalendarComponent {
   }
 
   setParameterForEvent() {
-    let e = this.allCalendars[this.currDragEl.id]    
+    let e = this.allCalendars[this.currDragEl.id]
+    console.log(e.derutation);
+    
     let hour = (parseInt((this.currDragEl.style.top) + 6) / DATE_CELL_HEIGHT) + 1
     e.format24Start = Math.floor(hour)
     let percentMin = hour - Math.floor(hour)
     let res = this.swithTimeFormat(Math.floor(hour))
     e.startParse.hour = res.digit
-    e.startParseFormat = res.format
+    e.startParse.format  = res.format
     let minutes: any = Math.trunc(Number(percentMin.toFixed(1)) * DATE_CELL_HEIGHT)
     e.startParse.min = this.rounding(minutes)
 
@@ -171,28 +177,19 @@ export class DayCalendarComponent {
 
     let { digit, format } = this.swithTimeFormat(e.format24End)
     e.endParse.hour = digit
-    e.endParseFormat = format
+    e.endParse.format  = format
     this.formatPretty(e)
   }
 
   formatPretty(e: any) {
-    if (e.startParseFormat == e.endParseFormat) {
-      if (e.startParse.min == '00' && e.endParse.min == '00') {
-        e.start = e.startParse.hour
-        e.end = `${e.endParse.hour} ${e.endParseFormat}`
-      } else {
-        e.start = `${e.startParse.hour}:${e.startParse.min}`
-        e.end = `${e.endParse.hour}:${e.endParse.min} ${e.endParseFormat}`
-      }
+    if (e.startParse.format  == e.endParse.format) {
+      e.start = e.startParse.min == '00' ? e.startParse.hour : `${e.startParse.hour}:${e.startParse.min}`
+      e.end = e.endParse.min == '00' ? `${e.endParse.hour}${e.endParse.format}` : `${e.endParse.hour}:${e.endParse.min} ${e.endParse.format }`
     } else {
-      if (e.startParse.min == '00' && e.endParse.min == '00') {
-        e.start = `${e.startParse.hour} ${e.startParseFormat}`
-        e.end = `${e.endParse.hour} ${e.endParseFormat}`
-      } else {
-        e.start = `${e.startParse.hour}:${e.startParse.min} ${e.startParseFormat}`
-        e.end = `${e.endParse.hour}:${e.endParse.min} ${e.endParseFormat}`
-      }
+      e.start = e.startParse.min == '00' ? `${e.startParse.hour} ${e.startParse.format }` : `${e.startParse.hour}:${e.startParse.min} ${e.startParse.format }`
+      e.end = e.endParse.min == '00' ? `${e.endParse.hour} ${e.endParse.format }` : `${e.endParse.hour}:${e.endParse.min} ${e.endParse.format }`
     }
+
   }
 
   getHoursFromMinutes(minutes: number) {
@@ -215,7 +212,7 @@ export class DayCalendarComponent {
   rounding(num: number): number | string {
     let res: any = 0
 
-    if (num > 0) {
+    if (num >= 0) {
       res = '00'
     }
     if (num > 15) {
@@ -292,13 +289,11 @@ export class DayCalendarComponent {
       this.currYear == this.d.getFullYear()
   }
 
-  sendEventInfo(index:any) {
+  sendEventInfo(index: any) {
     setTimeout(() => {
       if (!this.mousemoving) {
         this.eventInfo = this.allCalendars[index]
-        this.currDragEl.style.boxShadow = `0px 1px 15px 4px ${this.currDragEl.style.background}`
-        this.prevZindexDragEl = this.currDragEl.style.zIndex
-        this.currDragEl.style.zIndex = 999
+        this.currDragEl.style.boxShadow = `0px 2px 11px 0px ${this.currDragEl.style.background}`
       }
     }, 100);
   }
@@ -306,7 +301,9 @@ export class DayCalendarComponent {
   clearEventInfo() {
     this.eventInfo = null
     this.currDragEl.style.boxShadow = 'none'
-    this.currDragEl.style.zIndex = this.prevZindexDragEl
+    this.currDragEl = null
   }
+
+
 
 }

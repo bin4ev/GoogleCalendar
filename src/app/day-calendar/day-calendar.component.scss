@@ -176,8 +176,7 @@
     word-wrap: break-word;
     display: block;
     font-weight: bold;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin: 0px 5px 2px 0;
 }
 
 .horiz-line {
@@ -194,4 +193,9 @@
   z-index: 999 !important;
   width : 97%  !important;
   left: 4% !important;
+}
+
+.smallEvent {
+    display: flex;
+    align-items: center;
 }
