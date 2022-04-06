@@ -20,29 +20,29 @@ export class DayCalendarComponent {
   d = new Date()
   weekdays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   time = [
-    { id: 0, time: '1AM' },
-    { id: 2, time: '2AM' },
-    { id: 3, time: '3AM' },
-    { id: 4, time: '4AM' },
-    { id: 5, time: '5AM' },
-    { id: 6, time: '6AM' },
-    { id: 7, time: '7AM' },
-    { id: 8, time: '8AM' },
-    { id: 9, time: '9AM' },
-    { id: 10, time: '10AM' },
-    { id: 11, time: '11AM' },
-    { id: 12, time: '12AM' },
-    { id: 13, time: '1PM' },
-    { id: 14, time: '2PM' },
-    { id: 15, time: '3PM' },
-    { id: 16, time: '4PM' },
-    { id: 17, time: '5PM' },
-    { id: 18, time: '6PM' },
-    { id: 19, time: '7PM' },
-    { id: 20, time: '8PM', },
-    { id: 21, time: '9PM' },
-    { id: 22, time: '10PM' },
-    { id: 23, time: '11PM' }]
+    { id: 0, time: '1 AM' },
+    { id: 2, time: '2 AM' },
+    { id: 3, time: '3 AM' },
+    { id: 4, time: '4 AM' },
+    { id: 5, time: '5 AM' },
+    { id: 6, time: '6 AM' },
+    { id: 7, time: '7 AM' },
+    { id: 8, time: '8 AM' },
+    { id: 9, time: '9 AM' },
+    { id: 10, time: '10 AM' },
+    { id: 11, time: '11 AM' },
+    { id: 12, time: '12 AM' },
+    { id: 13, time: '1 PM' },
+    { id: 14, time: '2 PM' },
+    { id: 15, time: '3 PM' },
+    { id: 16, time: '4 PM' },
+    { id: 17, time: '5 PM' },
+    { id: 18, time: '6 PM' },
+    { id: 19, time: '7 PM' },
+    { id: 20, time: '8 PM', },
+    { id: 21, time: '9 PM' },
+    { id: 22, time: '10 PM' },
+    { id: 23, time: '11 PM' }]
 
   currYear = this.d.getFullYear()
   currMonth = this.d.getMonth()
@@ -57,6 +57,8 @@ export class DayCalendarComponent {
   subscrMouseUp!: any
   eventInfo!: any
   mousemoving = false
+  createEventStart!: any
+
 
 
   constructor(private utilService: UtilsService,
@@ -81,7 +83,7 @@ export class DayCalendarComponent {
     this.parseDurationEvent()
     this.addDayOfWeek()
     this.setEvents()
-    for(let e of this.allCalendars){
+    for (let e of this.allCalendars) {
       this.formatPretty(e)
     }
   }
@@ -113,8 +115,7 @@ export class DayCalendarComponent {
     this.mousemoving = false
     this.subscrMouseMove = this.renderer.listen(this.datesWrapper.nativeElement, 'mousemove', this.onMouseMove.bind(this))
     this.subscrMouseUp = this.renderer.listen('document', 'mouseup', this.onMouseUp.bind(this))
-    this.currDragEl = e.target;
-
+    this.currDragEl = e.target.closest('.events');
 
     this.offsetTop = this.currDragEl.offsetTop - e.clientY
   }
@@ -123,7 +124,7 @@ export class DayCalendarComponent {
     e.preventDefault()
     if (!this.mousemoving) {
       this.currDragEl.classList.add('draging')
-      this.currDragEl.style.boxShadow = `0px 2px 11px 0px ${this.currDragEl.style.background}`
+      this.currDragEl.style.boxShadow = `#b1b1b1 0px 2px 14px 4px`
     }
     this.mousemoving = true
     let calcCord = e.clientY + this.offsetTop
@@ -156,13 +157,13 @@ export class DayCalendarComponent {
   setParameterForEvent() {
     let e = this.allCalendars[this.currDragEl.id]
     console.log(e.derutation);
-    
+
     let hour = (parseInt((this.currDragEl.style.top) + 6) / DATE_CELL_HEIGHT) + 1
     e.format24Start = Math.floor(hour)
     let percentMin = hour - Math.floor(hour)
     let res = this.swithTimeFormat(Math.floor(hour))
     e.startParse.hour = res.digit
-    e.startParse.format  = res.format
+    e.startParse.format = res.format
     let minutes: any = Math.trunc(Number(percentMin.toFixed(1)) * DATE_CELL_HEIGHT)
     e.startParse.min = this.rounding(minutes)
 
@@ -177,17 +178,22 @@ export class DayCalendarComponent {
 
     let { digit, format } = this.swithTimeFormat(e.format24End)
     e.endParse.hour = digit
-    e.endParse.format  = format
+    e.endParse.format = format
     this.formatPretty(e)
   }
 
   formatPretty(e: any) {
-    if (e.startParse.format  == e.endParse.format) {
+    if (e.duration <= 45) {
+      e.start = e.startParse.min == '00' ? `${e.startParse.hour} ${e.startParse.format}` : `${e.startParse.hour}:${e.startParse.min} ${e.startParse.format}`
+      return
+    }
+
+    if (e.startParse.format == e.endParse.format) {
       e.start = e.startParse.min == '00' ? e.startParse.hour : `${e.startParse.hour}:${e.startParse.min}`
-      e.end = e.endParse.min == '00' ? `${e.endParse.hour}${e.endParse.format}` : `${e.endParse.hour}:${e.endParse.min} ${e.endParse.format }`
+      e.end = e.endParse.min == '00' ? `${e.endParse.hour}${e.endParse.format}` : `${e.endParse.hour}:${e.endParse.min} ${e.endParse.format}`
     } else {
-      e.start = e.startParse.min == '00' ? `${e.startParse.hour} ${e.startParse.format }` : `${e.startParse.hour}:${e.startParse.min} ${e.startParse.format }`
-      e.end = e.endParse.min == '00' ? `${e.endParse.hour} ${e.endParse.format }` : `${e.endParse.hour}:${e.endParse.min} ${e.endParse.format }`
+      e.start = e.startParse.min == '00' ? `${e.startParse.hour} ${e.startParse.format}` : `${e.startParse.hour}:${e.startParse.min} ${e.startParse.format}`
+      e.end = e.endParse.min == '00' ? `${e.endParse.hour} ${e.endParse.format}` : `${e.endParse.hour}:${e.endParse.min} ${e.endParse.format}`
     }
 
   }
@@ -293,9 +299,9 @@ export class DayCalendarComponent {
     setTimeout(() => {
       if (!this.mousemoving) {
         this.eventInfo = this.allCalendars[index]
-        this.currDragEl.style.boxShadow = `0px 2px 11px 0px ${this.currDragEl.style.background}`
+        this.currDragEl.style.boxShadow = `#b1b1b1 0px 2px 14px 4px`
       }
-    }, 100);
+    }, 200);
   }
 
   clearEventInfo() {
@@ -304,6 +310,19 @@ export class DayCalendarComponent {
     this.currDragEl = null
   }
 
+  createEvent(e: any) {
+    let [h, format] = e.target.firstElementChild.textContent.split(' ')
+    let m: any = e.clientY - e.target.getBoundingClientRect().y
+    m = m == DATE_CELL_HEIGHT ? '00' : String(m).padStart(2, '0')
+    this.createEventStart = {
+      start: `${h}:${m} ${format}`,
+      end: '00:00 AM'
+      //todo end
+    }
+  }
 
+  closeCreateEvent() {
+    this.createEventStart = null
+  }
 
 }

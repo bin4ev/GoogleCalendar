@@ -20,23 +20,19 @@ export class CalendarService {
         createdBy: 'Stamat Ivanow',
         guests: [
           {
-            name: 'Stamat Ivanov',
-            email: ' stamat@gmail.com',
+            email: 'stamat@gmail.com',
             going: true
           },
           {
-            name: 'Dimitar Dimitrov',
-            email: ' dimitar@gmail.com',
+            email: 'dimitar@gmail.com',
             going: false
           },
           {
-            name: 'Gosho Goshev',
-            email: ' gosho@gmail.com',
+            email: 'gosho@gmail.com',
             going: undefined
           },
           {
-            name: 'Gero Gerov',
-            email: ' gero@gmail.com',
+            email: 'gero@gmail.com',
             going: undefined
           },
         ]
@@ -51,18 +47,15 @@ export class CalendarService {
         createdBy: 'Ivaylo Ivaylov',
         guests: [
           {
-            name: 'Stamat Ivanov',
-            email: ' stamat@gmail.com',
+            email: 'stamat@gmail.com',
             going: true
           },
           {
-            name: 'Dimitar Dimitrov',
-            email: ' dimitar@gmail.com',
+            email: 'dimitar@gmail.com',
             going: true
           },
           {
-            name: 'Gosho Goshev',
-            email: ' gosho@gmail.com',
+            email: 'gosho@gmail.com',
             going: true
           },
         ]
@@ -77,18 +70,15 @@ export class CalendarService {
         createdBy: 'Ivaylo Ivaylov',
         guests: [
           {
-            name: 'Stamat Ivanov',
-            email: ' stamat@gmail.com',
+            email: 'stamat@gmail.com',
             going: false
           },
           {
-            name: 'Dimitar Dimitrov',
-            email: ' dimitar@gmail.com',
+            email: 'dimitar@gmail.com',
             going: false
           },
           {
-            name: 'Gosho Goshev',
-            email: ' gosho@gmail.com',
+            email: 'gosho@gmail.com',
             going: false
           },
         ]
@@ -103,18 +93,15 @@ export class CalendarService {
         createdBy: 'Ivaylo Ivaylov',
         guests: [
           {
-            name: 'Stamat Ivanov',
-            email: ' stamat@gmail.com',
+            email: 'stamat@gmail.com',
             going: true
           },
           {
-            name: 'Dimitar Dimitrov',
-            email: ' dimitar@gmail.com',
+            email: 'dimitar@gmail.com',
             going: undefined
           },
           {
-            name: 'Gosho Goshev',
-            email: ' gosho@gmail.com',
+            email: 'gosho@gmail.com',
             going: undefined
           },
         ]
@@ -129,18 +116,15 @@ export class CalendarService {
         createdBy: 'Ivaylo Ivaylov',
         guests: [
           {
-            name: 'Stamat Ivanov',
-            email: ' stamat@gmail.com',
+            email: 'stamat@gmail.com',
             going: false
           },
           {
-            name: 'Dimitar Dimitrov',
-            email: ' dimitar@gmail.com',
+            email: 'dimitar@gmail.com',
             going: false
           },
           {
-            name: 'Gosho Goshev',
-            email: ' gosho@gmail.com',
+            email: 'gosho@gmail.com',
             going: undefined
           },
         ]
@@ -157,17 +141,14 @@ export class CalendarService {
         createdBy: 'Ivaylo Ivaylov',
         guests: [
           {
-            name: 'Stamat Ivanov',
             email: 'stamat@gmail.com',
             going: undefined
           },
           {
-            name: 'Dimitar Dimitrov',
             email: 'dimitar@gmail.com',
             going: undefined
           },
           {
-            name: 'Gosho Goshev',
             email: 'gosho@gmail.com',
             going: undefined
           },
@@ -183,17 +164,14 @@ export class CalendarService {
         createdBy: 'Ivaylo Ivaylov',
         guests: [
           {
-            name: 'Stamat Ivanov',
             email: 'stamat@gmail.com',
             going: true
           },
           {
-            name: 'Dimitar Dimitrov',
             email: 'dimitar@gmail.com',
             going: true
           },
           {
-            name: 'Gosho Goshev',
             email: 'gosho@gmail.com',
             going: true
           },
@@ -211,17 +189,14 @@ export class CalendarService {
         createdBy: 'Ivaylo Ivaylov',
         guests: [
           {
-            name: 'Stamat Ivanov',
             email: 'stamat@gmail.com',
             going: true
           },
           {
-            name: 'Dimitar Dimitrov',
             email: 'dimitar@gmail.com',
             going: true
           },
           {
-            name: 'Gosho Goshev',
             email: 'gosho@gmail.com',
             going: undefined
           },
@@ -237,17 +212,14 @@ export class CalendarService {
         createdBy: 'Ivaylo Ivaylov',
         guests: [
           {
-            name: 'Stamat Ivanov',
             email: 'stamat@gmail.com',
             going: true
           },
           {
-            name: 'Dimitar Dimitrov',
             email: 'dimitar@gmail.com',
             going: false
           },
           {
-            name: 'Gosho Goshev',
             email: 'gosho@gmail.com',
             going: undefined
           },
@@ -314,5 +286,9 @@ export class CalendarService {
       min: Number(m),
       format
     }
+  }
+
+  setEvent(owner: any, event: Event) {
+    this.allEvents[owner].push(event)
   }
 }

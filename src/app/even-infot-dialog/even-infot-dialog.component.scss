@@ -1,0 +1,233 @@
+$default-left:20px;
+
+.event-info {
+    z-index: 99;
+    position: absolute;
+    top: 20px;
+    left: 31%;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    max-height: 67%;
+    max-width: 530px;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0px 1px 20px 1px #e2e2e2;
+}
+
+
+.boy, .girl, .grandma, .grandparents, .man-3{
+    display: inline-block;
+    background: url('../../assets/icons/sprite.png') no-repeat;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+}
+ 
+.boy { background-position: -0px -0px; width: 24px; height: 24px; }
+.girl { background-position: -24px -0px; width: 24px; height: 24px; }
+.grandma { background-position: -0px -24px; width: 24px; height: 24px; }
+.grandparents { background-position: -24px -24px; width: 24px; height: 24px; }
+.man-3 { background-position: -0px -48px; width: 24px; height: 24px; }
+
+.body{
+    overflow: auto;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.header-options:not(:last-of-type) {
+    margin-right: 10px;
+}
+
+.header-options {
+    cursor: pointer;
+    width: 32;
+    width: 34px;
+    border-radius: 50%;
+    height: 34px;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.header-options:last-of-type {
+    margin-left: 20px;
+}
+
+.info {
+    margin-top: 20px;
+    margin-left: $default-left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.info-icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 35px;
+}
+
+.info-content-name {
+    font-family: "Google Sans",Roboto,Arial,sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: #3c4043;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.start-day-time {
+    font-size: 18px;
+}
+
+.primary-btn {
+    font-size: 18px;
+    background-color: #1a73e8;
+    color: #fff;
+    padding: 8px 11px;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.primary-btn:active{
+    transform: scale(1.1);
+}
+
+.span-info {
+    margin-right: 3px;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 3px;
+}
+
+.details {
+    color: #1a73e8;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.info-items {
+    margin-left: 8vh;
+    display: flex;
+    align-items: center;
+    margin: 20 0 0 20;
+    margin: 20px 0px 20px 77px;
+}
+
+.item-name {
+    margin-left: 8px;
+}
+
+.footer {
+    align-items: center;
+    border-top: #dadce0 1px solid;
+    display: flex;
+    background-color: white;
+    min-height: 48px;
+    margin-top: 30px;
+    justify-content: space-between;
+    transition: transform .1s linear;
+    transform: translateY(0%);
+}
+
+.show-dinamic {
+    transform: translateY(-48px);
+}
+
+.footer-btns {
+    border: 1px solid #dadce0;
+    border-radius: 14px;
+    padding: 4px 18px;
+    min-width: 48px;
+    max-width: 100%;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 13px;
+}
+
+:is(.footer-btns,.footer-icon,.header-options):hover {
+    background: whitesmoke;
+}
+
+.btn-wrap {
+    display: flex;
+    width: 100%;
+    border-right: solid 1px whitesmoke;
+    justify-content: flex-end;
+}
+
+.body::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    
+}
+
+.body::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background-color: #dadde0;
+  border-radius: 10px;
+} 
+
+
+.event-info:hover .body::-webkit-scrollbar-thumb{
+    background-color: #c2bfbf;
+} 
+
+
+.status-presence {
+    position: relative
+}
+
+.status-presence > svg{
+    position: absolute;
+    left: 14px;
+}
+
+.dinamic-footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top: #dadce0 1px solid;
+    height: 48px;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer-icon{
+    display: flex;
+    margin-left: 5px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    transform: rotate(180deg);
+}
+
+.footer-wrap {
+    position: relative;
+}
+
+.componet-wraper{
+    position: absolute;
+    z-index: 2;
+}

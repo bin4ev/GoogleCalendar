@@ -1,5 +1,10 @@
 export interface Event {
-    name: string,
+    id: string,
     start: string,
-    date: string
+    end: string,
+    date: string,
+    color: string,
+    createdBy: string,
+    guests: {email:string, going: boolean}[],
+    name: string,
 }

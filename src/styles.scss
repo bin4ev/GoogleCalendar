@@ -1,8 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;1,300&family=Roboto:wght@100;300;400&display=swap');
+
 * {
     box-sizing:border-box;
-    font-family: "Google Sans",Roboto,Arial,sans-serif;
+    font-family: Open Sans,Roboto,Arial,sans-serif;
+    overscroll-behavior: none;
 }
 
 .main {
@@ -21,12 +23,13 @@
     overflow-x: hidden;
     transition: 0.3s;
 }
+
 .holidays-wraper {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     align-items: center;
-    padding: 4px;
 }
+
 .big-btn {
     border-bottom: solid 3px #c9c4c4;
     border-top: solid 2px #e5dada;
@@ -43,6 +46,7 @@
     color: #70757a;
     align-items: center;
 }
+
 .big-btn:hover {
     box-shadow: 0px 7px 20px 0px #dbd2d2;
     background: #F6FAFE;
@@ -64,36 +68,61 @@ img {
     justify-content: space-between;
     padding: 5px 16px;
 }
+
 .mainmenubtn:hover {
     background-color: rgb(226, 218, 218)
 }
+
 .mainmenubtn:active {
     background-image:  linear-gradient(to right, rgba(27, 27, 27, 0), rgb(157, 155, 155));
 }
+
 .dropdown {
     position: relative;
     display: inline-block;
 }
+
 .dropdown-child {
     display: none;
     min-width: 200px;
 }
+
 input[type='checkbox']{
-    width: 14px !important;
-    height: 14px !important;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -o-appearance: none;
+    position: relative;
+    width: 21px;
+    height: 21px;
     appearance: none;
-    outline: 1px solid gray;
-    box-shadow: none;
+    border-radius: 4px;
     font-size: 0.8em;
-    text-align: center;
   }
+
+  input[type='checkbox']::before {
+    position: absolute;
+    content: "";
+    left: 3px;
+    top: 1.5px;
+    width: 14.5px;
+    height: 17px;
+    background-color: white;
+  
+  }
+  input[type='checkbox']:checked:before {
+      display: none;
+  } 
+
   
   input[type='checkbox']:checked:after {
-    content: '✔';
+    position: absolute;
+    content: "";
+    left: 7px;
+    top: 1px;
+    width: 4px;
+    height: 11px;
+    border: solid white;
+    border-width: 0 4px 4.5px 0;
+    transform: rotate(45deg);
     color: white;
+    transition: 0.5s all;
   }
 
 .events {
@@ -120,9 +149,7 @@ input[type='checkbox']{
     background-color: #616261;
     font-size: 13px;
     padding: 6px;
-    /* top: 8px; */
-    /* left: -28px; */
-    z-index: 9999;
+    z-index: 99;
     transition: top 2s, width 2s;
 }
 

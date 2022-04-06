@@ -14,6 +14,8 @@ import { WeekCalendarComponent } from './week-calendar/week-calendar.component';
 import { NavigatorComponent } from './header/navigator/navigator.component';
 import { ToolTipDirective } from './tool-tip.directive';
 import { EvenInfotDialogComponent } from './even-infot-dialog/even-infot-dialog.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { CreateEventComponent } from './create-event/create-event.component';
 
 
 const routes: Routes = [
@@ -37,7 +39,9 @@ const routes: Routes = [
     WeekCalendarComponent,
     NavigatorComponent,
     ToolTipDirective,
-    EvenInfotDialogComponent
+    EvenInfotDialogComponent,
+    UserInfoComponent,
+    CreateEventComponent
   ],
   imports: [
     BrowserModule,

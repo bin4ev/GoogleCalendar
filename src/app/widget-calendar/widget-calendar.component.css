@@ -14,7 +14,8 @@
 }
 .curr-date {
        background-color: #1967D2 !important;
-   /*     padding: 5px; */
+       width: 25px;
+       height: 25px;
        border-radius: 19px;
        display: flex;
        align-items: center;

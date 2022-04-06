@@ -1,0 +1,89 @@
+<div #dialog class="event-info" (click)="stopPropagate($event)">
+    <div class="header">
+        <span class="header-options" [appToolTip]="'edit'">
+            <svg focusable="false" width="20" height="20" viewBox="0 0 24 24" class=" NMm5M"><path d="M20.41 4.94l-1.35-1.35c-.78-.78-2.05-.78-2.83 0L3 16.82V21h4.18L20.41 7.77c.79-.78.79-2.05 0-2.83zm-14 14.12L5 19v-1.36l9.82-9.82 1.41 1.41-9.82 9.83z"></path></svg>
+        </span>
+        <span  class="header-options" [appToolTip]="'delete'">
+            <svg focusable="false" width="20" height="20" viewBox="0 0 24 24" class=" NMm5M"><path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path><path d="M9 8h2v9H9zm4 0h2v9h-2z"></path></svg>
+        </span>
+        <span class="header-options" [appToolTip]="'options'">
+            <svg focusable="false" width="20" height="20" viewBox="0 0 24 24" class=" NMm5M"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
+        </span>
+        <span class="header-options" (click)="close()"  [appToolTip]="'close'">
+            <svg  focusable="false" width="20" height="20" viewBox="0 0 24 24" class=" NMm5M"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+        </span>
+    </div>
+    <div class="body">
+        <div class="info">
+            <span class="info-icon" [style]="{'background': data.color}"></span>
+            <div class="info-content">
+                <div class="info-content-name">{{data.name}}</div>
+                <div class="info-content-time">
+                    <span class="start-day-time">{{data.dayOfWeek}}, {{data.month}} {{data.date}}</span>
+                    <span style="margin: 0 8px">-</span>
+                    <span class="start-time">{{data.start}} - {{data.end}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="info">
+            <div class="info-icon"><img src="https://ssl.gstatic.com/calendar/images/conferenceproviders/logo_meet_2020q4_192px.svg" alt=""></div>
+            <div class="info-content">
+                <div class="primary-btn">Join with Google Meet</div>
+                <span class="span-info">meet.google.com/pek-fmud-prz</span>
+            </div>
+        </div>
+        <div class="info">
+            <div class="info-icon"><svg focusable="false" width="20" height="20" viewBox="0 0 24 24" class=" NMm5M"><path d="M16.01 14.46l-2.62 2.62a16.141 16.141 0 0 1-6.5-6.5l2.62-2.62a.98.98 0 0 0 .27-.9L9.13 3.8c-.09-.46-.5-.8-.98-.8H4c-.56 0-1.03.47-1 1.03a17.92 17.92 0 0 0 2.43 8.01 18.08 18.08 0 0 0 6.5 6.5 17.92 17.92 0 0 0 8.01 2.43c.56.03 1.03-.44 1.03-1v-4.15c0-.48-.34-.89-.8-.98l-3.26-.65a.99.99 0 0 0-.9.27z"></path></svg></div>
+            <div class="info-content">
+                <div class="details">Join by phone</div>
+                <span class="span-info">(US) +1 530-648-0746‬ PIN: ‪498 216 693‬#</span>
+            </div>
+        </div>
+        <div class="info">
+            <div class="info-icon"><svg focusable="false" width="20" height="20" viewBox="0 0 24 24" class=" NMm5M"><path d="M15 8c0-1.42-.5-2.73-1.33-3.76.42-.14.86-.24 1.33-.24 2.21 0 4 1.79 4 4s-1.79 4-4 4c-.43 0-.84-.09-1.23-.21-.03-.01-.06-.02-.1-.03A5.98 5.98 0 0 0 15 8zm1.66 5.13C18.03 14.06 19 15.32 19 17v3h4v-3c0-2.18-3.58-3.47-6.34-3.87zM9 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m0 9c-2.7 0-5.8 1.29-6 2.01V18h12v-1c-.2-.71-3.3-2-6-2M9 4c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4zm0 9c2.67 0 8 1.34 8 4v3H1v-3c0-2.66 5.33-4 8-4z"></path></svg></div>
+            <div class="info-content">
+                <div class="start-day-time">{{totalGuests}} guests</div>
+                <div>
+                    <span class="span-info" *ngIf="presenceInfo.yes != 0">{{presenceInfo.yes}} yes</span>
+                    <span class="span-info" *ngIf="presenceInfo.no != 0">{{presenceInfo.no}} no</span>
+                    <span class="span-info" *ngIf="presenceInfo.awaiting != 0">{{presenceInfo.awaiting}} awaiting</span>
+                </div>
+            </div>
+        </div>
+            <div class="info-items" *ngFor="let guest of data.guests let i = index"
+                (mouseleave)="closeUserInfo($event)">
+                <div class="status-presence" *ngIf="guest.going == false" ><svg xmlns="https://www.w3.org/2000/svg" width="14" height="14"><path fill="#FAD2CF" d="M7 0c3.87 0 7 3.13 7 7s-3.13 7-7 7-7-3.13-7-7 3.13-7 7-7z"></path><path fill="none" stroke="#B31412" stroke-width="1.5" d="M4 10l6-6M10 10L4 4"></path></svg></div>
+                <div class="status-presence" *ngIf="guest.going"><svg xmlns="https://www.w3.org/2000/svg" width="14" height="14"><path fill="#CEEAD6" d="M7 0c3.87 0 7 3.13 7 7s-3.13 7-7 7-7-3.13-7-7 3.13-7 7-7z"></path><path fill="none" stroke="#137333" stroke-width="1.5" d="M3.5 6.5L6 9l5-5"></path></svg></div>
+       <!--          <span class="info-icon" (mouseover)="showUser(i, $event)"><img src="../../assets/icons/{{usersInfo[i].icon}}" alt=""></span> -->
+                <span class="info-icon"  (mouseover)="showUser(i, $event)"><div class="{{usersInfo[i].icon}}"></div></span>
+                <span class="item-name"  (mouseover)="showUser(i,$event)">{{usersInfo[i].name}}</span>
+                <div #userInfoComp class="componet-wraper" *ngIf="showUserInfo && indexChoosenUser == i">
+                    <app-user-info  [userInfo]="usersInfo[i]"
+                        (mouseover)="showUser(i)">
+                    </app-user-info>
+                </div>
+            </div>
+        <div class="info">
+            <div class="info-icon"><fa-icon [icon]="calendarIcon"></fa-icon></div>
+            <div class="info-content">
+                <div  class="start-day-time">{{data.createdBy}}</div>
+                <span class="span-info">Organizer</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer-wrap">
+        <div class="footer" [ngClass]="{'show-dinamic':showDinamicFooter} ">
+            <span class="item-name">Going?</span>
+            <div class="btn-wrap">
+                <div class="footer-btns">Yes</div>
+                <div class="footer-btns">No</div>
+                <div class="footer-btns">Maybe</div>
+            </div>
+            <div class="footer-icon" (click)="toggledDinamicFooter($event)"><fa-icon [icon]="showDinamicFooter ? iconDown : iconUp "></fa-icon></div>
+        </div>
+        <div class="dinamic-footer" *ngIf="showDinamicFooter">
+            <div class="footer-btns">Propose a new time</div>
+            <div class="footer-btns">add note</div>
+        </div>
+    </div>
+</div>
