@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewChildren, Output, EventEmitter, QueryList, HostListener, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChildren, Output, EventEmitter, QueryList, HostListener, Renderer2, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { CalendarService } from '../calendar.service';
 import { UserService } from '../user.service';
 import { UtilsService } from '../utils.service';
 
 
-const END_HEIGHT_DATE_WRAPPER = 1382
+const END_HEIGHT_DATE_WRAPPER = 1350
 const DATE_CELL_HEIGHT = 60
 const START_HEIGHT_DATE_WRAPPER = 10
 const DEFAULT_TOP_POS = 5
+const OFFSET_TOP_POS = 55 //check
 
 @Component({
   selector: 'app-day-calendar',
@@ -16,6 +17,7 @@ const DEFAULT_TOP_POS = 5
 })
 export class DayCalendarComponent {
   @ViewChild('datesWrapper') datesWrapper!: ElementRef
+  @ViewChild('createdEvent') createdEvent!: ElementRef
 
   @Output() sentCurrDate = new EventEmitter
 
@@ -66,7 +68,8 @@ export class DayCalendarComponent {
     private userService: UserService,
     private utilService: UtilsService,
     private calendarService: CalendarService,
-    private renderer: Renderer2) {
+    private renderer: Renderer2,
+    private detectChangeRef : ChangeDetectorRef) {
     this.utilService.getCurrDate$.subscribe(d => {
       this.setDateView(d)
     })
@@ -87,15 +90,17 @@ export class DayCalendarComponent {
     let m = currentDate.getMinutes()
     this.timeTicker = this.datesWrapper.nativeElement.firstElementChild
     let topPos = (DATE_CELL_HEIGHT * h) + m
-    this.timeTicker.style.top = (topPos - 55) + 'px'
+    this.timeTicker.style.top = (topPos - OFFSET_TOP_POS) + 'px'
     this.startTicking()
   }
 
   startTicking() {
-    setInterval(() => {
+    let interval = setInterval(() => {
       let top = parseInt(this.timeTicker.style.top)
       if (top > END_HEIGHT_DATE_WRAPPER) {
         top = DEFAULT_TOP_POS
+        clearInterval(interval)
+        this.timeTicker.style.display = 'none'
       }
       top++
       this.timeTicker.style.top = top + 'px'
@@ -348,7 +353,7 @@ export class DayCalendarComponent {
 
     let user = this.userService.getLoggedUserInfo()
     this.createEventStart = {
-      name:('(No title)'),
+      name: ('(No title)'),
       start: `${h}:${m} ${format}`,
       end: `${Number(h) + 1}:${m}`,
       duration: 60,
@@ -360,6 +365,10 @@ export class DayCalendarComponent {
 
   closeCreateEvent() {
     this.createEventStart = null
+  }
+
+  setPositionScrow() {
+  /*   this.createdEvent.nativeElement.scrollIntoView(true); */ // check
   }
 
 }

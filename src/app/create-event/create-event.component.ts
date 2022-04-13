@@ -3,6 +3,8 @@ import { faCalendarDay, faClockFour, faSortDown } from '@fortawesome/free-solid-
 import { pipe, skip } from 'rxjs';
 import { UtilsService } from '../utils.service';
 
+const DATE_CELL_HEIGHT = 60
+
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
@@ -14,6 +16,7 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
 
   @Output() closeDialog = new EventEmitter()
   @Output() setEvent = new EventEmitter()
+  @Output() setPos = new EventEmitter()
 
   time = [
     { id: 0, time: '1:00 AM' },
@@ -63,6 +66,8 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
       this.currMonth = this.currDate.toLocaleString('default', { month: 'long' })
       this.data.date = `${d.getDate()}/${d.getMonth() + 1}`
     })
+    this.data.startParse = this.parseTime(this.data.start)
+    this.data.endParse = this.parseTime(this.data.end)
 
   }
 
@@ -102,10 +107,15 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
     this.timeShowEl.classList.remove('active-time-change')
     if (this.timeShowEl.classList.contains('start-time')) {
       this.data.start = e.target.textContent
+      this.data.startParse = this.parseTime(this.data.start)
+      this.setPosition()
       return
     }
 
     this.data.end = e.target.textContent
+    this.data.endParse = this.parseTime(this.data.end)
+    this.add24HoursFormat(this.data)
+    this.setDuration()
   }
 
   showCaledarWidget(e: any) {
@@ -141,5 +151,33 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
     this.setEvent.emit()
   }
 
+  setPosition() {
+    this.data.format24Start = this.data.startParse.format == 'PM' ? this.data.startParse.hour + 12 :  this.data.startParse.hour
+    let topPos = (DATE_CELL_HEIGHT * this.data.format24Start) + this.data.startParse.min
+    this.data.top = topPos
+    this.setPos.emit()
+  }
+
+  setDuration() {
+    let minutes = (this.data.format24End - this.data.format24Start) * DATE_CELL_HEIGHT
+    minutes -= this.data.startParse.min
+    minutes += this.data.endParse.min
+    this.data.duration = minutes
+  }
+
+  add24HoursFormat(data: any) {
+      data.format24Start = data.startParse.format == 'PM' ? data.startParse.hour + 12 : data.startParse.hour
+      data.format24End = data.endParse.format == 'PM' ? data.endParse.hour + 12 : data.endParse.hour
+  }
+
+  parseTime(time: string) {
+    let [h, min] = time.split(':')
+    let [m, format] = min.split(' ')
+    return {
+      hour: Number(h),
+      min: Number(m),
+      format
+    }
+  }
 
 }

@@ -35,7 +35,7 @@
             <span *ngIf="e.duration > 45;else formatShort">{{e.start}}-{{e.end}}</span>
             <ng-template #formatShort>, {{e.start}}</ng-template>    
         </div>
-        <div class="events" *ngIf="createEventStart" [ngClass]="{'smallEvent' : createEventStart.duration < 45}" 
+        <div #createdEvent class="events" *ngIf="createEventStart" [ngClass]="{'smallEvent' : createEventStart.duration < 45}" 
         [ngStyle]="{
           'background': createEventStart.color,
           'top':(createEventStart.top - 50) +'px',
@@ -52,7 +52,9 @@
     </div>
     <div *ngIf="createEventStart">
         <app-create-event [data]="createEventStart"
-        (closeDialog)="closeCreateEvent()"></app-create-event>
+        (closeDialog)="closeCreateEvent()"
+        (setPos)="setPositionScrow()">
+    </app-create-event>
     </div> 
 
 </div>
