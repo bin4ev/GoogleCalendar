@@ -3,21 +3,20 @@ $default-left:20px;
 .event-info {
     z-index: 99;
     position: absolute;
-    top: 20px;
-    left: 31%;
+    top: 130px;
+    left: 35%;
     display: flex;
     flex-direction: column;
     background: white;
     max-height: 67%;
-    max-width: 530px;
+    max-width: 630px;
     width: 100%;
     border-radius: 5px;
     box-shadow: 0px 1px 20px 1px #e2e2e2;
     box-sizing: border-box;
-    
 }
 
-.body{
+.body {
     overflow: auto;
     height: 100%;
 }
@@ -53,7 +52,7 @@ $default-left:20px;
 
 .title>input {
     color: #3c4043;
-    font-family: Google Sans,Roboto,Arial,sans-serif;
+    font-family: Google Sans, Roboto, Arial, sans-serif;
     font-size: 22px;
     outline: none;
     width: 100%;
@@ -68,32 +67,29 @@ $default-left:20px;
     width: 0%;
     background-color: #2C7EEA;
     height: 2px;
-    transition: all 0.5s ;
+    transition: all 0.5s;
 }
 
-.title>input:focus + .hr {
+.title>input:focus+.hr {
     width: 100%;
     left: 0
 }
 
-
-
-
-.btns-nav{
+.btns-nav {
     display: flex;
     justify-content: space-evenly;
     margin-top: 20px;
     margin-left: 38px;
 }
 
-.btns{
+.btns {
     color: #686C71;
     border: none;
     border-radius: 4px;
     border: none;
     height: 36px;
     padding: 0 8px;
-    font-family: "Google Sans",Roboto,Arial,sans-serif;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
     font-size: 14px;
     letter-spacing: 0.25px;
     line-height: 36px;
@@ -125,14 +121,26 @@ $default-left:20px;
     flex-direction: column;
     align-items: flex-start;
     margin-left: 15px;
-    position: relative;
+    padding: 7px 8px;
+    background-color: transparent;
+    width: 90%;
+    transition: background-color 200ms;
+}
+
+:is(.info-content:not(#meet-wrap, #organizer), .color-picker):hover {
+    background: #F6F6F6;
+    cursor: pointer;
+}
+
+#organizer {
+    border-top: solid 1px #c2bfbf;
 }
 
 .info-content-time {
-    font-family: Roboto,Arial,sans-serif;
+    font-family: Roboto, Arial, sans-serif;
     font-weight: 500;
     min-width: 1px;
-    font-size: 14px;
+    font-size: 17px;
     line-height: 20px;
     color: #3c4043;
 }
@@ -148,7 +156,7 @@ $default-left:20px;
     line-height: 1.5;
 }
 
-.primary-btn:active{
+.primary-btn:active {
     transform: scale(1.1);
 }
 
@@ -158,14 +166,13 @@ $default-left:20px;
     font-size: 12px;
 }
 
-.info-content-item{
-    color:#686C71 ;
-     font-family: Roboto,Arial,sans-serif;
-    font-size: 14px;
+.info-content-item {
+    color: #686C71;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 17px;
 }
 
 .data-time-item {
-    min-width: 150px;
     padding: 0 15px;
     line-height: 40px;
 }
@@ -179,7 +186,7 @@ $default-left:20px;
     max-height: 200px;
     overflow-y: scroll;
     position: absolute;
-    left: 132px;
+    left: 230px;
     margin-top: 5px;
     border-radius: 5px;
     box-shadow: 0px 1px 20px 1px #e2e2e2;
@@ -189,7 +196,7 @@ $default-left:20px;
 .data-time-list::-webkit-scrollbar {
     width: 10px;
     border-radius: 10px;
-    
+
 }
 
 .data-time-list::-webkit-scrollbar-track {
@@ -197,9 +204,9 @@ $default-left:20px;
 }
 
 .data-time-list::-webkit-scrollbar-thumb {
-  background-color: #dadde0;
-  border-radius: 10px;
-} 
+    background-color: #dadde0;
+    border-radius: 10px;
+}
 
 
 .details {
@@ -232,7 +239,7 @@ $default-left:20px;
 .footer-btns {
     font-size: 14px;
     background-color: #1a73e8;
-    color: #fff; 
+    color: #fff;
     padding: 1px 18px;
     border-radius: 4px;
     line-height: 2;
@@ -268,7 +275,7 @@ $default-left:20px;
 .body::-webkit-scrollbar {
     width: 10px;
     border-radius: 10px;
-    
+
 }
 
 .body::-webkit-scrollbar-track {
@@ -276,23 +283,59 @@ $default-left:20px;
 }
 
 .body::-webkit-scrollbar-thumb {
-  background-color: #dadde0;
-  border-radius: 10px;
-} 
+    background-color: #dadde0;
+    border-radius: 10px;
+}
 
 
-.event-info:hover .body::-webkit-scrollbar-thumb{
+.event-info:hover .body::-webkit-scrollbar-thumb {
     background-color: #c2bfbf;
-} 
-
+}
 
 .footer-wrap {
     position: relative;
 }
 
 .wraper-calendar-widget {
-    position: fixed;
-    z-index: 1; 
+    position: absolute;
+    z-index: 100;
     background: white;
 }
 
+:is(.start-time, .end-time, .start-day-time):hover {
+    border-bottom: #686C71 solid 1px;
+}
+
+.active-time-change {
+    padding: 1px;
+    border-bottom: solid 1px #2C7EEA;
+    ;
+    background-color: #C4C4C4;
+}
+
+.color {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.color-picker {
+    display: flex;
+    margin-left: 20px;
+    width: 60px;
+    padding: 5px 10px;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 300ms;
+}
+
+.color-picker:active {
+    background: #70757a;
+}
+
+#iconDown {
+    position: relative;
+    top: -3px;
+    color: #5F6368
+}

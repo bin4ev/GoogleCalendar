@@ -1,0 +1,4 @@
+<div class="container">
+    <div class="color" [ngStyle]="{'background': color}" [ngClass]="{'tick': defaultColor == color}" *ngFor="let color of colors"
+    (click)="chooseColor(color)"></div>
+</div>

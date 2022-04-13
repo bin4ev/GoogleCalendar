@@ -23,8 +23,8 @@ export class EvenInfotDialogComponent {
 
   iconDown = faAngleDown
   iconUp = faAngleUp
-
   calendarIcon = faCalendarDay
+  
   data!: any
   removeOnClick!: any
   totalGuests = 0

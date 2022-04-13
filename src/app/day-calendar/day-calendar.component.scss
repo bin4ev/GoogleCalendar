@@ -1,24 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
-:root{
-    --default-with : 97%;
-    --default-left : 4%
+:root {
+    --default-with: 97%;
+    --default-left: 4%
 }
 
 * {
-    box-sizing:border-box;
+    box-sizing: border-box;
     font-family: helvetica;
 }
+
 .selected {
     background-color: #1876F2;
     color: white;
 }
+
 .curr-date {
     background-color: #1967D2 !important;
     color: white;
     border-radius: 30px;
     width: 60px;
 }
+
 .container {
     display: flex;
     border-top: 1px solid #CED0D4;
@@ -27,11 +30,13 @@
     flex-direction: column;
     position: relative;
 }
+
 .header-calendar {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
+
 .days-wrapper {
     display: flex;
     justify-content: space-around;
@@ -41,11 +46,13 @@
     position: relative;
     bottom: 20px;
 }
-.days{
+
+.days {
     margin-bottom: 5px;
     font-size: 17px;
     font-weight: bold;
 }
+
 .dates-wrapper {
     cursor: pointer;
     width: 100%;
@@ -55,23 +62,22 @@
     margin-top: 25px;
     overflow: hidden scroll;
     position: relative;
+    padding-top: 10px;
 }
-.dates-wrapper > div:nth-child(1){
-    margin-top: 10px;
-}
+
 .dates-wrapper::-webkit-scrollbar {
     width: 8px;
     border-radius: 10px;
-    
 }
- .dates-wrapper::-webkit-scrollbar-track {
+
+.dates-wrapper::-webkit-scrollbar-track {
     border-radius: 10px;
 }
 
 .dates-wrapper::-webkit-scrollbar-thumb {
     background-color: #dadde0;
     border-radius: 10px;
-} 
+}
 
 
 .date-wrap {
@@ -79,7 +85,7 @@
     display: flex;
     align-items: flex-end;
     gap: 9px;
-} 
+}
 
 .date-format {
     font-size: 12px;
@@ -99,6 +105,7 @@
     font-weight: 500;
     color: #050505;
 }
+
 .date-cell {
     display: flex;
     width: 100%;
@@ -141,7 +148,7 @@
     right: 16px;
 }
 
-.time-items   {
+.time-items {
     bottom: 8px;
     position: relative;
     background-color: white;
@@ -149,7 +156,7 @@
     text-align: center;
 }
 
-.sep{
+.sep {
     width: 96%;
     position: absolute;
     background: #ebe5e5;
@@ -157,8 +164,8 @@
     left: 40px;
 }
 
-.date{
-     padding: 9px;
+.date {
+    padding: 9px;
 }
 
 .events {
@@ -170,11 +177,11 @@
     font-size: 14px;
     position: absolute;
     width: 97%;
-    left:4%;
+    left: /* 4%; */ 61px;
     z-index: 1;
 }
 
-.events-name{
+.events-name {
     word-wrap: break-word;
     display: block;
     font-weight: bold;
@@ -186,18 +193,40 @@
     width: 1px;
     position: absolute;
     left: 87px;
-    z-index: 100;
     top: 100px;
     bottom: 45px;
 }
 
-.draging{
-  z-index: 999 !important;
-  width : 97%  !important;
-  left: 4% !important;
+.draging {
+    z-index: 999 !important;
+    width: 97% !important;
+    left: 4% !important;
 }
 
 .smallEvent {
     display: flex;
     align-items: center;
+}
+
+.time-ticking {
+    position: absolute;
+    width: 95%;
+    display: flex;
+    z-index: 98;
+    left: 56px;
+    top: 5px;
+    align-items: center;
+}
+
+.circle {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: red;
+}
+
+.line {
+    width: 100%;
+    height: 2px;
+    background: red;
 }

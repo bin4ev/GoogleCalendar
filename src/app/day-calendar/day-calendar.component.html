@@ -9,7 +9,11 @@
             </div>
         </div>
     </div> 
-    <div #datesWrapper class="dates-wrapper"> 
+    <div #datesWrapper class="dates-wrapper">
+        <div class="time-ticking">
+            <div class="circle"></div>
+            <div class="line"></div>
+        </div>
         <div class="date-cell" *ngFor="let t of time let i = index "
         (click)="createEvent($event)">
             <span class="time-items" >{{t.time}}</span>      
@@ -31,7 +35,16 @@
             <span *ngIf="e.duration > 45;else formatShort">{{e.start}}-{{e.end}}</span>
             <ng-template #formatShort>, {{e.start}}</ng-template>    
         </div>
-     
+        <div class="events" *ngIf="createEventStart" [ngClass]="{'smallEvent' : createEventStart.duration < 45}" 
+        [ngStyle]="{
+          'background': createEventStart.color,
+          'top':(createEventStart.top - 50) +'px',
+          'height': createEventStart.duration + 'px'
+         }">
+         <span class="events-name">{{createEventStart.name}}</span>
+         <span *ngIf="createEventStart.duration > 45;else formatShort">{{createEventStart.start}}-{{createEventStart.end}}</span>
+         <ng-template #formatShort>, {{createEventStart.start}}</ng-template>   
+     </div>
     </div> 
     <div *ngIf="eventInfo">
         <app-even-infot-dialog [info]="eventInfo"

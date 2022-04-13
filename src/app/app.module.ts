@@ -16,6 +16,7 @@ import { ToolTipDirective } from './tool-tip.directive';
 import { EvenInfotDialogComponent } from './even-infot-dialog/even-infot-dialog.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { CreateEventComponent } from './create-event/create-event.component';
+import { ColorPickerComponent } from './color-picker/color-picker.component';
 
 
 const routes: Routes = [
@@ -41,7 +42,8 @@ const routes: Routes = [
     ToolTipDirective,
     EvenInfotDialogComponent,
     UserInfoComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    ColorPickerComponent
   ],
   imports: [
     BrowserModule,

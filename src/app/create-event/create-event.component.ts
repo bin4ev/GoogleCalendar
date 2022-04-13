@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { faClockFour } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDay, faClockFour, faSortDown } from '@fortawesome/free-solid-svg-icons';
 import { pipe, skip } from 'rxjs';
 import { UtilsService } from '../utils.service';
 
@@ -13,6 +13,7 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
   @Input() data!: any
 
   @Output() closeDialog = new EventEmitter()
+  @Output() setEvent = new EventEmitter()
 
   time = [
     { id: 0, time: '1:00 AM' },
@@ -39,8 +40,9 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
     { id: 22, time: '10:00 PM' },
     { id: 23, time: '11:00 PM' }]
 
-
   iconClock = faClockFour
+  calendarIcon = faCalendarDay
+  arrowDown = faSortDown
 
   currDate!: Date
   dayOfWeek!: any
@@ -50,21 +52,28 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
   timeShowEl!: HTMLElement
   showCalendar = false
   bodyEl!: HTMLElement
+  isOpenPicker = false
 
-  constructor(private utilsServic: UtilsService) { }
+  constructor(private utilsService: UtilsService) { }
 
   ngOnInit(): void {
-    this.utilsServic.getCurrDate$.subscribe(d => {
+    this.utilsService.getCurrDate$.subscribe(d => {
       this.currDate = d
       this.dayOfWeek = this.currDate.toLocaleString('en-us', { weekday: 'long' })
       this.currMonth = this.currDate.toLocaleString('default', { month: 'long' })
+      this.data.date = `${d.getDate()}/${d.getMonth() + 1}`
     })
 
   }
 
   ngAfterViewInit() {
     this.inputEl.nativeElement.focus()
+  }
 
+  onBlur(e: any) {
+    if (e.target.value) {
+      this.data.name = e.target.value
+    }
   }
 
   close() {
@@ -72,17 +81,25 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
   }
 
   showTimes(e: any) {
+    this.showTimeToChoose = false
+    this.showCalendar = false
     if (!this.bodyEl) {
       this.bodyEl = e.target.closest('.body')
     }
+
+    this.timeShowEl?.classList.remove('active-time-change')
     this.timeShowEl = e.target
-    this.showTimeToChoose = true
+    this.timeShowEl.classList.add('active-time-change')
+    setTimeout(() => {
+      this.showTimeToChoose = true
+    }, 300);
     this.bodyEl.style.overflow = 'hidden'
   }
 
   closeTimes(e: any) {
     this.showTimeToChoose = false
     this.bodyEl.style.overflow = 'auto'
+    this.timeShowEl.classList.remove('active-time-change')
     if (this.timeShowEl.classList.contains('start-time')) {
       this.data.start = e.target.textContent
       return
@@ -92,15 +109,36 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
   }
 
   showCaledarWidget(e: any) {
+    this.timeShowEl?.classList.remove('active-time-change')
+    this.showTimeToChoose = false
     if (!this.bodyEl) {
       this.bodyEl = e.target.closest('.body')
     }
     this.bodyEl.style.overflow = 'hidden'
-    this.showCalendar = true
-    this.utilsServic.getCurrDate$.pipe(
-        skip(1)
-      ).subscribe(_ => this.showCalendar = false)
-    
+    e.target.classList.add('active-time-change')
+    setTimeout(() => {
+      this.showCalendar = true
+    }, 300);
+
+    this.utilsService.getCurrDate$.pipe(
+      skip(1)
+    ).subscribe(_ => {
+      this.showCalendar = false
+      e.target.classList.remove('active-time-change')
+    })
+  }
+
+  openPicker() {
+    this.isOpenPicker = true
+  }
+
+  setColor(color: string) {
+    this.data.color = color
+    this.isOpenPicker = false
+  }
+
+  setEventInfo() {
+    this.setEvent.emit()
   }
 
 

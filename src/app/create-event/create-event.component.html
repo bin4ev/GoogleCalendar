@@ -8,7 +8,7 @@
         </span>
     </div>
     <div class="title">
-        <input #input type="text" name="title" placeholder="Add title" value="">
+        <input #input type="text" name="title" placeholder="Add title" value="" (blur)="onBlur($event)">
         <div class="hr"></div>
     </div>
     <div class="body">
@@ -23,15 +23,15 @@
             <span class="info-icon"><fa-icon [icon]="iconClock"></fa-icon></span>
             <div class="info-content">
                 <div class="info-content-time">
-                    <span class="start-day-time" (click)="showCaledarWidget($event)">{{dayOfWeek}}, {{currMonth}} {{currDate.getDate()}}</span>
+                    <span class="start-day-time" (mouseup)="showCaledarWidget($event)">{{dayOfWeek}}, {{currMonth}} {{currDate.getDate()}}</span>
                     <span style="margin: 0 8px">-</span>
-                    <span class="start-time" (click)="showTimes($event)">{{data.start}}</span>
+                    <span class="start-time" (mouseup)="showTimes($event)">{{data.start}}</span>
                     <span style="margin: 5px;">-</span>
-                    <span class="end-time" (click)="showTimes($event)">{{data.end}}</span>
-                    <div  style="position: fixed; z-index: 1;" *ngIf="showTimeToChoose">
+                    <span class="end-time" (mouseup)="showTimes($event)">{{data.end}}</span>
+                    <div  *ngIf="showTimeToChoose">
                         <div class="data-time-list" >
                             <div class="data-time-item" *ngFor="let t of time"
-                            (click)="closeTimes($event)"
+                            (mouseup)="closeTimes($event)"
                             >{{t.time}}</div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
         </div>
         <div class="info">  
             <span class="info-icon"><img src="https://ssl.gstatic.com/calendar/images/conferenceproviders/logo_meet_2020q4_192px.svg" alt=""></span>
-            <div class="info-content"> 
+            <div class="info-content" id="meet-wrap" > 
                 <div class="primary-btn">Add Google Meet video conferencing</div>
             </div>
         </div>
@@ -61,7 +61,21 @@
                 <span class="info-content-item">Add location</span>
             </div>
         </div>
-
+            <div class="info">  
+                <span class="info-icon"><fa-icon [icon]="calendarIcon"></fa-icon>
+                </span>
+                <div class="info-content" id="organizer"> 
+                    <div style="display: flex; align-items: center;">
+                        <span class="info-content-item">{{data.createdBy}}</span>
+                        <div class="color-picker" (click)="openPicker()">
+                            <div class="color" [ngStyle]="{'background': data?.color}"></div>
+                            <div id="iconDown"><fa-icon [icon]="arrowDown"></fa-icon></div>
+                        </div>
+                    </div>
+                </div>
+                <app-color-picker *ngIf="isOpenPicker" [defaultColor]="data.color"
+                (sendColor)="setColor($event)"></app-color-picker>
+            </div>
     </div>
     <div class="footer">
         <div class="btn-wrap">
