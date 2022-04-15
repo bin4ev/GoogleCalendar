@@ -37,9 +37,9 @@ export class UserService {
   getLoggedUserInfo() {
     return  {
       email: 'dragan@gmail.com',
-      name: 'Dragan Gerov',
+      name: 'Dragan',
       icon: 'man',
-      color: 'red'
+      color: 'green'
     }
   }
 

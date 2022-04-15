@@ -1,4 +1,4 @@
-<div class="event-info">
+<div #dialog class="event-info">
     <div class="header">
         <span class="header-options" [appToolTip]="'edit'">
             <svg focusable="false" width="20" height="20" viewBox="0 0 24 24" class=" NMm5M"><path d="M20 9H4v2h16V9zM4 15h16v-2H4v2z"></path></svg>
@@ -28,7 +28,7 @@
                     <span class="start-time" (mouseup)="showTimes($event)">{{data.start}}</span>
                     <span style="margin: 5px;">-</span>
                     <span class="end-time" (mouseup)="showTimes($event)">{{data.end}}</span>
-                    <div  *ngIf="showTimeToChoose">
+                    <div *ngIf="showTimeToChoose">
                         <div class="data-time-list" >
                             <div class="data-time-item" *ngFor="let t of time"
                             (mouseup)="closeTimes($event)"
@@ -80,7 +80,7 @@
     <div class="footer">
         <div class="btn-wrap">
             <div class="footer-btns-secondary">More option</div>
-            <div class="footer-btns">Save</div>
+            <div class="footer-btns" (click)="saveEvent()">Save</div>
         </div>
        
     </div>

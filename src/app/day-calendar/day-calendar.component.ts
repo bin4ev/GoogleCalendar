@@ -4,11 +4,11 @@ import { UserService } from '../user.service';
 import { UtilsService } from '../utils.service';
 
 
-const END_HEIGHT_DATE_WRAPPER = 1350
+const END_HEIGHT_DATE_WRAPPER = 1440
 const DATE_CELL_HEIGHT = 60
 const START_HEIGHT_DATE_WRAPPER = 10
 const DEFAULT_TOP_POS = 5
-const OFFSET_TOP_POS = 55 //check
+const OFFSET_TOP_POS = 50 //check
 
 @Component({
   selector: 'app-day-calendar',
@@ -46,7 +46,9 @@ export class DayCalendarComponent {
     { id: 20, time: '8 PM', },
     { id: 21, time: '9 PM' },
     { id: 22, time: '10 PM' },
-    { id: 23, time: '11 PM' }]
+    { id: 23, time: '11 PM' },
+    { id: 23, time: '12 PM' },
+  ]
 
   currYear = this.d.getFullYear()
   currMonth = this.d.getMonth()
@@ -69,7 +71,7 @@ export class DayCalendarComponent {
     private utilService: UtilsService,
     private calendarService: CalendarService,
     private renderer: Renderer2,
-    private detectChangeRef : ChangeDetectorRef) {
+    private detectChangeRef: ChangeDetectorRef) {
     this.utilService.getCurrDate$.subscribe(d => {
       this.setDateView(d)
     })
@@ -86,11 +88,13 @@ export class DayCalendarComponent {
 
   getPositionTimeTick() {
     let currentDate = new Date();
-    let h = currentDate.getHours()
+    let h = currentDate.getHours() == 0 ? 24 :  currentDate.getHours() 
     let m = currentDate.getMinutes()
     this.timeTicker = this.datesWrapper.nativeElement.firstElementChild
     let topPos = (DATE_CELL_HEIGHT * h) + m
-    this.timeTicker.style.top = (topPos - OFFSET_TOP_POS) + 'px'
+    console.log(topPos);
+    
+    this.timeTicker.style.top = (topPos - OFFSET_TOP_POS - DEFAULT_TOP_POS ) + 'px'
     this.startTicking()
   }
 
@@ -278,7 +282,7 @@ export class DayCalendarComponent {
           event.top = ((DATE_CELL_HEIGHT * event.format24Start) + Number(event.startParse.min))
           event.zIndex = i + 1
           event.left = 61 + 'px'
-          event.width = 97 + '%'
+          event.width = 96 + '%'
           continue
         }
 
@@ -286,7 +290,7 @@ export class DayCalendarComponent {
         event.zIndex = i + 1
         event.left = (prevLeft + 12) + '%'
         prevLeft = prevLeft + 12
-        event.width = (97 - prevLeft) + '%'
+        event.width = (96 - prevLeft) + '%'
       }
     }
   }
@@ -348,18 +352,19 @@ export class DayCalendarComponent {
     let [h, format] = e.target.firstElementChild.textContent.split(' ')
     h = format == 'PM' ? Number(h) + 12 : h
     let m: any = Math.round(e.clientY - e.target.getBoundingClientRect().y)
-    m = m == DATE_CELL_HEIGHT ? '00' : String(m).padStart(2, '0')
+    m = m > 30 ? 30 : '00'
     let topPos = (DATE_CELL_HEIGHT * Number(h)) + Number(m)
-
     let user = this.userService.getLoggedUserInfo()
+    let formatEnd = Number(h) + 1 > 12 ? 'PM' : 'AM'
     this.createEventStart = {
       name: ('(No title)'),
       start: `${h}:${m} ${format}`,
-      end: `${Number(h) + 1}:${m}`,
+      end: `${Number(h) + 1}:${m} ${formatEnd}`,
       duration: 60,
       createdBy: user.name,
       color: user.color,
-      top: topPos
+      top: topPos,
+      guests: []
     }
   }
 
@@ -368,7 +373,7 @@ export class DayCalendarComponent {
   }
 
   setPositionScrow() {
-  /*   this.createdEvent.nativeElement.scrollIntoView(true); */ // check
+    this.createdEvent.nativeElement.scrollIntoView(true)
   }
 
 }

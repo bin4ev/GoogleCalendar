@@ -54,11 +54,12 @@ $default-left:20px;
     color: #3c4043;
     font-family: Google Sans, Roboto, Arial, sans-serif;
     font-size: 22px;
-    outline: none;
     width: 100%;
     max-width: 477px;
     height: 28px;
     border: none;
+    border-bottom: 1px solid rgb(208 208 208);;
+    outline: none;
 }
 
 .hr {
@@ -71,7 +72,7 @@ $default-left:20px;
 }
 
 .title>input:focus+.hr {
-    width: 100%;
+    width: 91%;
     left: 0
 }
 
