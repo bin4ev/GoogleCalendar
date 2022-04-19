@@ -48,14 +48,18 @@
     </div> 
     <div *ngIf="eventInfo">
         <app-even-infot-dialog [info]="eventInfo"
-        (closeDialog)="clearEventInfo()"></app-even-infot-dialog>
+        (closeDialog)="clearEventInfo()"
+        (deleteEv)="deleteEvent()">
+        </app-even-infot-dialog>
     </div>
     <div *ngIf="createEventStart">
         <app-create-event [data]="createEventStart"
         (closeDialog)="closeCreateEvent()"
+        (saveEv)="saveEvent()"
         (setPos)="setPositionScrow()">
     </app-create-event>
     </div> 
+<!--     <app-notification  *ngIf="notificationInfo" [info]="notificationInfo"></app-notification> -->
 
 </div>
 

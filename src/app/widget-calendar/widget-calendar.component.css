@@ -1,26 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
-* {
-    box-sizing:border-box;
-    font-family: helvetica;
-}
+
+
 .selected {
-    background-color: #AECBFA!important;
-  /*   padding: 5px; */
-    border-radius: 19px;
+    background-color: #AECBFA !important;
+    border-radius: 50%;
     display: flex;
     color: white;
     align-items: center;
     justify-content: center;
+    width: 32px;
 }
+
 .curr-date {
-       background-color: #1967D2 !important;
-       width: 25px;
-       height: 25px;
-       border-radius: 19px;
-       display: flex;
-       align-items: center;
-       justify-content: center;
+    background-color: #1967D2 !important;
+    width: 25px;
+    height: 25px;
+    border-radius: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .container {
     width: 250px;
     padding: 10px;
@@ -29,11 +29,13 @@
     border: 1px solid #CED0D4;
     border-radius: 10px;
 }
+
 .header-calendar {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
+
 .days-wrapper {
     display: flex;
     justify-content: space-around;
@@ -43,22 +45,26 @@
     font-size: 13px;
     color: #B3B4B6;
 }
-.days{
+
+.days {
     width: 25px;
     margin-bottom: 5px;
 }
+
 .dates-wrapper {
     flex-wrap: wrap;
     cursor: pointer;
     font-size: 16px;
     display: flex;
 }
+
 .title {
     font-weight: 500;
     color: #050505;
 }
+
 .date-cell {
-   /*  padding: 6px;    */
+    /*  padding: 6px;    */
     display: flex;
     width: 24px;
     border-radius: 8px;
@@ -67,6 +73,7 @@
     margin-right: 8px;
     justify-content: center;
 }
+
 .btns {
     cursor: pointer;
     color: grey;
@@ -78,9 +85,11 @@
     width: 30px;
     justify-content: center;
 }
+
 .dates-before {
     color: grey;
 }
-.date-cell>span{
+
+.date-cell>span {
     padding: 5px;
 }

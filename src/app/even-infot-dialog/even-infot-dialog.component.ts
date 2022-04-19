@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, ComponentRef, ContentChild, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { faAngleDown, faAngleUp, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
+import { CalendarService } from '../calendar.service';
 import { UserInfoComponent } from '../user-info/user-info.component';
 import { UserService } from '../user.service';
 
@@ -20,11 +21,12 @@ export class EvenInfotDialogComponent {
   }
 
   @Output() closeDialog = new EventEmitter()
+  @Output() deleteEv = new EventEmitter()
 
   iconDown = faAngleDown
   iconUp = faAngleUp
   calendarIcon = faCalendarDay
-  
+
   data!: any
   removeOnClick!: any
   totalGuests = 0
@@ -42,7 +44,7 @@ export class EvenInfotDialogComponent {
   constructor(private renderer: Renderer2,
     private userService: UserService,
     private changeDet: ChangeDetectorRef,
-
+    private calendarService: CalendarService
   ) { }
 
   ngOnInit(): void {
@@ -104,8 +106,8 @@ export class EvenInfotDialogComponent {
       if (e) {
         this.changeDet.detectChanges()
         let offSet = e.clientX - this.dialog?.nativeElement.getBoundingClientRect().x
-        this.userInfoRef!.nativeElement.style.top =  e.clientY  + 'px'
-        this.userInfoRef!.nativeElement.style.left = offSet + 15  + 'px'
+        this.userInfoRef!.nativeElement.style.top = e.clientY + 'px'
+        this.userInfoRef!.nativeElement.style.left = offSet + 15 + 'px'
       }
     }, 500);
   }
@@ -120,6 +122,10 @@ export class EvenInfotDialogComponent {
       this.indexChoosenUser = -1
     }, 500);
 
+  }
+
+  deleteEvent() {    
+    this.deleteEv.emit()
   }
 
   ngOnDestroy() {

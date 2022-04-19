@@ -17,7 +17,9 @@ import { EvenInfotDialogComponent } from './even-infot-dialog/even-infot-dialog.
 import { UserInfoComponent } from './user-info/user-info.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogDiscardChangesComponent } from './dialog-discard-changes/dialog-discard-changes.component';
+import { NotificationComponent } from './notification/notification.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'month', pathMatch: 'full' },
@@ -25,7 +27,6 @@ const routes: Routes = [
   { path: 'day', component: DayCalendarComponent},
   { path: 'day/event', component: EvenInfotDialogComponent },
   { path: 'week', component: WeekCalendarComponent },
-  /*   {path: 'event', component: EvenInfotDialogComponent}, */
   { path: '**', component: MonthCalendarComponent }
 ]
 
@@ -43,12 +44,15 @@ const routes: Routes = [
     EvenInfotDialogComponent,
     UserInfoComponent,
     CreateEventComponent,
-    ColorPickerComponent
+    ColorPickerComponent,
+    DialogDiscardChangesComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
+    MatDialogModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

@@ -3,6 +3,8 @@ import { faCalendarDay, faClockFour, faSortDown } from '@fortawesome/free-solid-
 import { pipe, skip, Subscription } from 'rxjs';
 import { CalendarService } from '../calendar.service';
 import { UtilsService } from '../utils.service';
+import { MatDialog, MatDialogRef, } from '@angular/material/dialog';
+import { DialogDiscardChangesComponent } from '../dialog-discard-changes/dialog-discard-changes.component';
 
 const DATE_CELL_HEIGHT = 60
 
@@ -18,6 +20,7 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
   @Output() closeDialog = new EventEmitter()
   @Output() setEvent = new EventEmitter()
   @Output() setPos = new EventEmitter()
+  @Output() saveEv = new EventEmitter()
 
   times = [
     { time: '1:00 AM' },
@@ -90,7 +93,8 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
 
   constructor(
     private utilsService: UtilsService,
-    private calendarService: CalendarService
+    private calendarService: CalendarService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -123,7 +127,19 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
   }
 
   close() {
-    this.closeDialog.emit()
+    if (!this.inputEl.nativeElement.value) {
+      this.closeDialog.emit()
+      return
+    }
+
+    const dialogRef = this.dialog.open(DialogDiscardChangesComponent)
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'discard') {
+        this.closeDialog.emit()
+      } else {
+        this.dialog.closeAll()
+      }
+    })
   }
 
   showTimes(e: any) {
@@ -239,13 +255,7 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
   }
 
   saveEvent() {
-    this.calendarService.setEvent(this.data.createdBy, this.data)
-    this.closeDialog.emit()
-    delete this.data
-    setTimeout(() => {
-      alert('Event savesd!')
-    }, 100);
-
+    this.saveEv.emit()
   }
 
   ngOnDestroy() {

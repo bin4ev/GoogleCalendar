@@ -1,4 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
+import { Event } from './events';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class CalendarService {
         end: '7:30 AM',
         date: '27/03',
         color: 'red',
-        createdBy: 'Stamat Ivanow',
+        createdBy: 'Ivan',
         guests: [
           {
             email: 'stamat@gmail.com',
@@ -44,7 +45,7 @@ export class CalendarService {
         end: '12:20 AM',
         date: '27/03',
         color: 'red',
-        createdBy: 'Ivaylo Ivaylov',
+        createdBy: 'Ivan',
         guests: [
           {
             email: 'stamat@gmail.com',
@@ -67,7 +68,7 @@ export class CalendarService {
         end: '6:00 AM',
         date: '27/03',
         color: 'red',
-        createdBy: 'Ivaylo Ivaylov',
+        createdBy: 'Ivan',
         guests: [
           {
             email: 'stamat@gmail.com',
@@ -90,7 +91,7 @@ export class CalendarService {
         end: '5:30 AM',
         date: '27/03',
         color: 'red',
-        createdBy: 'Ivaylo Ivaylov',
+        createdBy: 'Ivan',
         guests: [
           {
             email: 'stamat@gmail.com',
@@ -113,7 +114,7 @@ export class CalendarService {
         end: '4:15 PM',
         date: '27/03',
         color: 'red',
-        createdBy: 'Ivaylo Ivaylov',
+        createdBy: 'Ivan',
         guests: [
           {
             email: 'stamat@gmail.com',
@@ -138,7 +139,7 @@ export class CalendarService {
         end: '9:30 AM',
         date: '27/03',
         color: 'blue',
-        createdBy: 'Ivaylo Ivaylov',
+        createdBy: 'Stamat',
         guests: [
           {
             email: 'stamat@gmail.com',
@@ -161,7 +162,7 @@ export class CalendarService {
         end: '8:50 AM',
         date: '27/03',
         color: 'blue',
-        createdBy: 'Ivaylo Ivaylov',
+        createdBy: 'Stamat',
         guests: [
           {
             email: 'stamat@gmail.com',
@@ -186,7 +187,7 @@ export class CalendarService {
         end: '12:00 AM',
         date: '27/03',
         color: 'green',
-        createdBy: 'Ivaylo Ivaylov',
+        createdBy: 'Dragan',
         guests: [
           {
             email: 'stamat@gmail.com',
@@ -209,7 +210,7 @@ export class CalendarService {
         end: '8:50 PM',
         date: '27/03',
         color: 'green',
-        createdBy: 'Ivaylo Ivaylov',
+        createdBy: 'Dragan',
         guests: [
           {
             email: 'stamat@gmail.com',
@@ -228,8 +229,6 @@ export class CalendarService {
     ],
     holidays: []
   }
-
-
 
   constructor() {
     fetch('https://date.nager.at/api/v2/PublicHolidays/2022/BG')
@@ -289,6 +288,25 @@ export class CalendarService {
   }
 
   setEvent(owner: any, event: Event) {
-    this.allEvents[owner].push(event)
+    return new Promise((res, rej) => {
+      this.allEvents[owner].push(event)
+      if (this.allEvents[owner]) {
+        res('Done')
+      } else {
+        rej(Error('Something get wrong!'))
+      }
+    })
+  }
+
+  deleteEvent(owner: any, event: Event) {
+    let index = this.allEvents[owner].findIndex((x: any) => x.name == event.name)    
+    return new Promise((res, rej) => {
+      if (index > -1) {
+        this.allEvents[owner].splice(index,1)
+        res('Done')
+      } else {
+        rej(Error('Something get wrong!'))
+      }
+    })
   }
 }

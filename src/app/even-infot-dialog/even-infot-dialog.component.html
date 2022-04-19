@@ -3,7 +3,8 @@
         <span class="header-options" [appToolTip]="'edit'">
             <svg focusable="false" width="20" height="20" viewBox="0 0 24 24" class=" NMm5M"><path d="M20.41 4.94l-1.35-1.35c-.78-.78-2.05-.78-2.83 0L3 16.82V21h4.18L20.41 7.77c.79-.78.79-2.05 0-2.83zm-14 14.12L5 19v-1.36l9.82-9.82 1.41 1.41-9.82 9.83z"></path></svg>
         </span>
-        <span  class="header-options" [appToolTip]="'delete'">
+        <span  class="header-options" [appToolTip]="'delete'"
+        (click)="deleteEvent()">
             <svg focusable="false" width="20" height="20" viewBox="0 0 24 24" class=" NMm5M"><path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path><path d="M9 8h2v9H9zm4 0h2v9h-2z"></path></svg>
         </span>
         <span class="header-options" [appToolTip]="'options'">

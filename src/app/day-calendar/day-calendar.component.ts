@@ -65,6 +65,7 @@ export class DayCalendarComponent {
   mousemoving = false
   createEventStart!: any
   timeTicker!: HTMLDivElement
+  notificationInfo!: string
 
   constructor(
     private userService: UserService,
@@ -88,13 +89,13 @@ export class DayCalendarComponent {
 
   getPositionTimeTick() {
     let currentDate = new Date();
-    let h = currentDate.getHours() == 0 ? 24 :  currentDate.getHours() 
+    let h = currentDate.getHours() == 0 ? 24 : currentDate.getHours()
     let m = currentDate.getMinutes()
     this.timeTicker = this.datesWrapper.nativeElement.firstElementChild
     let topPos = (DATE_CELL_HEIGHT * h) + m
     console.log(topPos);
-    
-    this.timeTicker.style.top = (topPos - OFFSET_TOP_POS - DEFAULT_TOP_POS ) + 'px'
+
+    this.timeTicker.style.top = (topPos - OFFSET_TOP_POS - DEFAULT_TOP_POS) + 'px'
     this.startTicking()
   }
 
@@ -338,7 +339,7 @@ export class DayCalendarComponent {
       if (!this.mousemoving) {
         this.eventInfo = this.allCalendars[index]
         this.currDragEl.style.boxShadow = `#b1b1b1 0px 2px 14px 4px`
-      } ``
+      }
     }, 200);
   }
 
@@ -370,6 +371,45 @@ export class DayCalendarComponent {
 
   closeCreateEvent() {
     this.createEventStart = null
+  }
+
+  saveEvent() {
+    this.notificationInfo = 'Saving'
+    this.calendarService.setEvent(this.createEventStart.createdBy, this.createEventStart)
+      .then(_ => {
+        this.getAllCalendars()
+        this.closeCreateEvent()
+        setTimeout(() => {
+          alert('Event saved!')
+        }, 300)
+      })
+      .catch(err => {
+        this.closeCreateEvent()
+        console.error(err)
+        setTimeout(() => {
+          alert(err)
+        }, 300)
+      })
+  }
+
+  deleteEvent() {
+    this.notificationInfo = 'Deleting'
+    this.calendarService.deleteEvent(this.eventInfo.createdBy, this.eventInfo)
+      .then(_ => {
+
+        this.getAllCalendars()
+        this.clearEventInfo()
+        setTimeout(() => {
+          alert('Event deleted!')
+        }, 300)
+      })
+      .catch(err => {
+        this.clearEventInfo()
+        console.error(err)
+        setTimeout(() => {
+          alert(err)
+        }, 300)
+      })
   }
 
   setPositionScrow() {
